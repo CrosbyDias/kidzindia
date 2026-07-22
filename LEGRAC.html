@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leading Edge | GRCA Congress 2024 Mumbai Packages</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --le-red: #d9232d;
+            --le-yellow: #ffc107;
+            --le-white: #ffffff;
+            --le-dark: #212529;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc;
+        }
+
+        /* Top Header with Logos */
+        .header-main {
+            background: var(--le-white);
+            padding: 15px 0;
+            border-bottom: 4px solid var(--le-red);
+        }
+
+        .logo-box img {
+            max-height: 55px;
+            object-fit: contain;
+        }
+
+        .partnership-text {
+            font-size: 0.85rem;
+            color: var(--le-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        /* Navbar Customization */
+        .navbar-le {
+            background-color: var(--le-red);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-le .nav-link {
+            color: var(--le-white) !important;
+            font-weight: 600;
+            padding: 15px 20px !important;
+        }
+
+        .navbar-le .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--le-yellow) !important;
+        }
+
+        /* Search Section */
+        .hero-search {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1570160897040-30430ed22112?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            color: white;
+        }
+
+        .search-panel {
+            background: var(--le-yellow);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .search-panel label {
+            color: var(--le-dark);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        /* Hotel Cards */
+        .category-header {
+            border-left: 6px solid var(--le-red);
+            padding-left: 15px;
+            margin: 40px 0 25px;
+            color: var(--le-dark);
+            font-weight: 800;
+        }
+
+        .hotel-card {
+            border: none;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            height: 100%;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .hotel-img-container {
+            position: relative;
+            height: 220px;
+        }
+
+        .hotel-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .star-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--le-yellow);
+            color: var(--le-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .price-tag {
+            color: var(--le-red);
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .btn-le {
+            background-color: var(--le-red);
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .btn-le:hover {
+            background-color: #b01b23;
+            color: var(--le-yellow);
+        }
+
+        /* Modal Customization */
+        .modal-header-le {
+            background-color: var(--le-red);
+            color: white;
+        }
+        
+        .modal-gallery img {
+            height: 150px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .inquiry-form-container {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-top: 5px solid var(--le-yellow);
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--le-dark);
+        }
+
+        footer {
+            background: var(--le-dark);
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo Header -->
+    <header class="header-main">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo-box">
+                <img src="lee.jpeg" alt="Leading Edge Global">
+            </div>
+            <div class="text-center d-none d-md-block">
+                <span class="partnership-text">Strategic Partnership</span>
+                <div class="h5 mb-0 fw-bold">GRCA Congress 2026</div>
+            </div>
+            <div class="logo-box">
+                <img src="grca.png" alt="GRCA Logo">
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-le sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav w-100 justify-content-center">
+                    <li class="nav-item"><a class="nav-link" href="#all">All Packages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sahara">Near Sahara Star</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#juhu">Juhu Beach</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#airport">Airport Hotels</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#5star">5-Star Luxury</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <section class="hero-search">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold">GRCA Mumbai 2026 Delegate Accommodation</h1>
+                <p class="lead">Special negotiated packages for delegates of the International GRC Congress.</p>
+            </div>
+            
+            <div class="search-panel mx-auto" style="max-width: 1000px;">
+                <form class="row g-3">
+                    <div class="col-md-4">
+                        <label><i class="fa-solid fa-map-location-dot me-2"></i>Location Area</label>
+                        <select class="form-select form-select-lg" id="areaSelect">
+                            <option value="all">All Mumbai Areas</option>
+                            <option value="sahara">Near Sahara Star (Venue)</option>
+                            <option value="juhu">Juhu / Beachfront</option>
+                            <option value="airport">Airport Proximity</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label><i class="fa-solid fa-star me-2"></i>Min. Rating</label>
+                        <select class="form-select form-select-lg">
+                            <option>5 Star Only</option>
+                            <option>4 Star & Above</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label><i class="fa-solid fa-calendar me-2"></i>Dates</label>
+                        <input type="text" class="form-control form-select-lg" placeholder="Check-in - Check-out">
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="button" class="btn btn-le btn-lg w-100 py-2">FIND</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hotel Listings -->
+    <main class="container mb-5">
+        
+        <!-- Category: Sahara Star Area -->
+        <h3 id="sahara" class="category-header">Near Sahara Star Hotel (Congress Venue)</h3>
+        <div class="row g-4">
+            <!-- Hotel 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card hotel-card" onclick="openHotelModal('Sahara Star')">
+                    <div class="hotel-img-container">
+                        <span class="star-badge">5 Star Deluxe</span>
+                        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop" alt="Sahara Star">
+                    </div>
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold">Hotel Sahara Star</h5>
+                        <p class="text-muted small"><i class="fa-solid fa-location-dot me-1"></i> Opposite Domestic Airport, Vile Parle</p>
+                        <p class="card-text">The official venue hotel. Offers an architectural phenomenon with a tropical lagoon view.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <span class="price-tag">₹16,500 <small class="text-muted" style="font-size: 0.6rem;">/NIGHT</small></span>
+                            <span class="text-primary small fw-bold">View Details <i class="fa-solid fa-chevron-right ms-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card hotel-card" onclick="openHotelModal('The Orchid')">
+                    <div class="hotel-img-container">
+                        <span class="star-badge">5 Star</span>
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop" alt="The Orchid">
+                    </div>
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold">The Orchid Hotel</h5>
+                        <p class="text-muted small"><i class="fa-solid fa-location-dot me-1"></i> 200m from Sahara Star</p>
+                        <p class="card-text">An Ecotel certified luxury hotel providing sustainable luxury and world-class hospitality.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <span class="price-tag">₹12,200 <small class="text-muted" style="font-size: 0.6rem;">/NIGHT</small></span>
+                            <span class="text-primary small fw-bold">View Details <i class="fa-solid fa-chevron-right ms-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Juhu Beach -->
+        <h3 id="juhu" class="category-header">Juhu Beachfront Packages</h3>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card hotel-card" onclick="openHotelModal('JW Marriott Juhu')">
+                    <div class="hotel-img-container">
+                        <span class="star-badge">5 Star Luxury</span>
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2070&auto=format&fit=crop" alt="JW Marriott">
+                    </div>
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold">JW Marriott Mumbai Juhu</h5>
+                        <p class="text-muted small"><i class="fa-solid fa-location-dot me-1"></i> Juhu Tara Road (4km to Venue)</p>
+                        <p class="card-text">Ultimate beach luxury. Preferred choice for delegates traveling with families.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <span class="price-tag">₹21,000 <small class="text-muted" style="font-size: 0.6rem;">/NIGHT</small></span>
+                            <span class="text-primary small fw-bold">View Details <i class="fa-solid fa-chevron-right ms-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Hotel Detail Modal -->
+    <div class="modal fade" id="hotelDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header modal-header-le">
+                    <h5 class="modal-title fw-bold" id="modalHotelTitle">Hotel Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <img id="modalMainImg" src="" class="img-fluid rounded shadow-sm w-100" style="height: 350px; object-fit: cover;">
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="fw-bold mb-1">Package Description</h4>
+                            <p id="modalDescription" class="text-muted">Loading description...</p>
+                            
+                            <h5 class="fw-bold mt-4">What's Included</h5>
+                            <div class="row">
+                                <div class="col-6">
+                                    <ul class="small">
+                                        <li>Buffet Breakfast</li>
+                                        <li>Airport Transfers</li>
+                                        <li>High-speed Wi-Fi</li>
+                                    </ul>
+                                </div>
+                                <div class="col-6">
+                                    <ul class="small">
+                                        <li>Event Shuttle Service</li>
+                                        <li>Business Center Access</li>
+                                        <li>Gym & Pool Access</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="modal-gallery d-flex flex-column">
+                                <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=500" alt="Room View">
+                                <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=500" alt="Dining">
+                            </div>
+                            <div class="p-3 bg-light rounded text-center">
+                                <p class="mb-1 text-muted small">Special Delegate Rate</p>
+                                <h4 class="fw-bold text-danger mb-3" id="modalPrice">₹0</h4>
+                                <button class="btn btn-le w-100 py-2" onclick="openInquiryModal()">INQUIRE NOW</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inquiry Form Modal -->
+    <div class="modal fade" id="inquiryModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title"><i class="fa-solid fa-paper-plane me-2 text-warning"></i>Inquiry Registration</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="inquiry-form-container">
+                        <p class="text-center mb-4 small text-muted">Please fill in your details and our travel expert will contact you within 24 hours.</p>
+                        <form id="delegateInquiryForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" required placeholder="John">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" required placeholder="Doe">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Work Email</label>
+                                    <input type="email" class="form-control" required placeholder="john.doe@company.com">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" required placeholder="+91 XXXX-XXXXXX">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Interested Hotel</label>
+                                    <select class="form-select" id="formHotelSelect">
+                                        <option value="Sahara Star">Hotel Sahara Star</option>
+                                        <option value="The Orchid">The Orchid Hotel</option>
+                                        <option value="JW Marriott Juhu">JW Marriott Mumbai Juhu</option>
+                                        <option value="Taj Santacruz">Taj Santacruz</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-le w-100 py-3 text-uppercase">Submit Inquiry</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="fw-bold mb-3">Leading Edge Global</h5>
+                    <p class="small">Travel and logistics partner for GRCA Congress 2026 Mumbai.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="small text-white-50">Strategic Travel Management for Corporate Excellence.</p>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="text-center small text-white-50">
+                &copy; 2026 Leading Edge Global. All rights reserved. Partner of GRCA.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const hotelData = {
+            'Sahara Star': {
+                description: 'Experience a unique blend of hospitality and luxury at Hotel Sahara Star. Ideally located near the Domestic Airport, this hotel features the world\'s largest pillar-less clear-to-sky dome and a breathtaking tropical lagoon.',
+                price: '₹16,500',
+                img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070'
+            },
+            'The Orchid': {
+                description: 'The Orchid Mumbai is Asia\'s first certified ecofriendly five-star hotel. Located next to the airport, it offers delegates a peaceful stay with zero-waste initiatives and world-class business amenities.',
+                price: '₹12,200',
+                img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070'
+            },
+            'JW Marriott Juhu': {
+                description: 'A beachfront icon, the JW Marriott Juhu offers stunning views of the Arabian Sea. It is a favorite for high-profile delegates seeking resort-style luxury while staying close to the business hubs of Mumbai.',
+                price: '₹21,000',
+                img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2070'
+            }
+        };
+
+        const hotelDetailModal = new bootstrap.Modal(document.getElementById('hotelDetailModal'));
+        const inquiryModal = new bootstrap.Modal(document.getElementById('inquiryModal'));
+
+        function openHotelModal(hotelName) {
+            const data = hotelData[hotelName];
+            document.getElementById('modalHotelTitle').innerText = hotelName;
+            document.getElementById('modalDescription').innerText = data.description;
+            document.getElementById('modalPrice').innerText = data.price;
+            document.getElementById('modalMainImg').src = data.img;
+            
+            // Set the dropdown in the inquiry form to match
+            document.getElementById('formHotelSelect').value = hotelName;
+            
+            hotelDetailModal.show();
+        }
+
+        function openInquiryModal() {
+            hotelDetailModal.hide();
+            inquiryModal.show();
+        }
+
+        document.getElementById('delegateInquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            const originalText = btn.innerText;
+            
+            btn.disabled = true;
+            btn.innerText = 'Processing...';
+            
+            // Simulated Success
+            setTimeout(() => {
+                inquiryModal.hide();
+                alert('Thank you for your interest! A Leading Edge representative will contact you shortly with the customized GRCA 2026 package.');
+                btn.disabled = false;
+                btn.innerText = originalText;
+                this.reset();
+            }, 1500);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId !== '#all') {
+                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

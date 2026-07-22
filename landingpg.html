@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leading Edge Travel Management Pvt. Ltd.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-primary: #030303;
+            --bg-surface: #0a0a0a;
+            --bg-surface-hover: #141414;
+            --text-primary: #e0e0e0;
+            --text-secondary: #888888;
+            --accent: #ff003c;
+            --accent-glow: rgba(255, 0, 60, 0.6);
+            --border: #222222;
+            --card-border: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(3, 3, 3, 0.8);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Teko', sans-serif;
+        }
+
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 90px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            transition: transform 0.4s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-logo-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+
+        .nav-logo-text {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .nav-logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            position: relative;
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--accent);
+            color: var(--text-primary) !important;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            text-decoration: none;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            width: 0; height: 100%;
+            background: var(--accent);
+            transform: skewX(-15deg) translateX(-50%);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1;
+        }
+
+        .nav-cta:hover::before {
+            width: 150%;
+        }
+
+        .nav-cta:hover {
+            color: #fff !important;
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(80%) contrast(1.1) brightness(0.35);
+            transform: scale(1.1);
+            animation: heroBgZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroBgZoom {
+            0% { transform: scale(1.1); }
+            100% { transform: scale(1.2); }
+        }
+
+        .hero-gradient {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(0deg, #030303 0%, rgba(3,3,3,0.6) 40%, rgba(255,0,60,0.05) 100%);
+            z-index: 1;
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px; height: 2px;
+            background: rgba(255, 0, 60, 0.5);
+            border-radius: 50%;
+            animation: particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) translateX(100px); opacity: 0; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero-badge i {
+            color: var(--accent);
+            font-size: 0.7rem;
+        }
+
+        .hero-title {
+            font-size: clamp(4rem, 10vw, 11rem);
+            font-weight: 500;
+            line-height: 0.85;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title .accent {
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title .accent::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-weight: 400;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2.5rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: scrollBounce 2s infinite;
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-size: 5rem;
+            font-weight: 500;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            max-width: 600px;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all 0.5s;
+        }
+
+        .about-image:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 40%;
+            background: linear-gradient(0deg, var(--bg-primary), transparent);
+            pointer-events: none;
+        }
+
+        .about-image-border {
+            position: absolute;
+            top: -15px; left: -15px;
+            width: 100px; height: 100px;
+            border-left: 2px solid var(--accent);
+            border-top: 2px solid var(--accent);
+            z-index: 2;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-item h4 {
+            font-size: 3rem;
+            color: var(--accent);
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .about-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .about-feature i {
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        /* Services Section */
+        .services-section {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            padding: 3rem 2rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: default;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            border-color: rgba(255, 0, 60, 0.3);
+            background: var(--bg-surface-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .service-icon {
+            width: 50px; height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .service-card h3 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .service-card .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .service-card .service-link i {
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover .service-link {
+            color: var(--accent);
+        }
+
+        .service-card:hover .service-link i {
+            transform: translateX(5px);
+        }
+
+        /* Destinations Section */
+        .destinations-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dest-tab {
+            padding: 1rem 2.5rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-family: 'Teko', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .dest-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .dest-tab.active {
+            color: #fff;
+        }
+
+        .dest-tab.active::after {
+            transform: scaleX(1);
+        }
+
+        .dest-tab:hover {
+            color: #fff;
+        }
+
+        .dest-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .dest-card {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid var(--card-border);
+        }
+
+        .dest-card img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(1.1);
+        }
+
+        .dest-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1);
+        }
+
+        .dest-card-overlay {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(0deg, #000 0%, rgba(0,0,0,0.8) 30%, rgba(255,0,60,0.05) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            transition: background 0.5s;
+        }
+
+        .dest-card:hover .dest-card-overlay {
+            background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(255,0,60,0.1) 100%);
+        }
+
+        .dest-card-tag {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            width: fit-content;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s 0.1s;
+        }
+
+        .dest-card:hover .dest-card-tag {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dest-card h3 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            transform: translateY(10px);
+            transition: transform 0.4s;
+        }
+
+        .dest-card:hover h3 {
+            transform: translateY(0);
+        }
+
+        .dest-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s 0.15s;
+        }
+
+        .dest-card:hover p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dest-card-arrow {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            width: 40px; height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            opacity: 0;
+            transform: translate(-10px, 10px);
+            transition: all 0.4s 0.2s;
+        }
+
+        .dest-card:hover .dest-card-arrow {
+            opacity: 1;
+            transform: translate(0, 0);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .dest-panel {
+            display: none;
+        }
+
+        .dest-panel.active {
+            display: grid;
+        }
+
+        /* MICE Section */
+        .mice-section {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mice-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 600px;
+        }
+
+        .mice-visual {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mice-visual img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(80%) contrast(1.1);
+            transition: filter 0.5s;
+        }
+
+        .mice-visual:hover img {
+            filter: grayscale(0%);
+        }
+
+        .mice-visual-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent 60%, var(--bg-surface) 100%);
+        }
+
+        .mice-content {
+            padding: 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .mice-features {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mice-feature {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .mice-feature-num {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 500;
+            line-height: 1;
+            flex-shrink: 0;
+            width: 40px;
+        }
+
+        .mice-feature h4 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .mice-feature p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Marquee */
+        .marquee-section {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 20s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-item {
+            font-family: 'Teko', sans-serif;
+            font-size: 5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.05);
+            white-space: nowrap;
+            padding: 0 3rem;
+        }
+
+        .marquee-item .sep {
+            color: var(--accent);
+            opacity: 0.3;
+            margin: 0 2rem;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Why Us Section */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .why-card {
+            padding: 3rem 2rem;
+            border: 1px solid var(--card-border);
+            background: var(--bg-surface);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent);
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .why-card:hover::after {
+            width: 100%;
+        }
+
+        .why-card:hover {
+            border-color: rgba(255, 0, 60, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .why-card-num {
+            font-family: 'Teko', sans-serif;
+            font-size: 4rem;
+            color: rgba(255, 0, 60, 0.1);
+            font-weight: 500;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .why-card h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .why-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+        }
+
+        .contact-offices {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .office-card {
+            padding: 2rem;
+            border: 1px solid var(--card-border);
+            background: var(--bg-primary);
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .office-card:hover {
+            border-color: rgba(255, 0, 60, 0.3);
+        }
+
+        .office-card h4 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .office-card h4 i {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .office-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .office-card a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+
+        .office-card a:hover {
+            opacity: 0.8;
+        }
+
+        .contact-form-wrap {
+            position: relative;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-submit {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 1.2rem 3rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .form-submit:hover {
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Policies Section */
+        .policies-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .policy-card {
+            padding: 2.5rem 2rem;
+            border: 1px solid var(--card-border);
+            background: var(--bg-surface);
+        }
+
+        .policy-card h4 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .policy-card h4 i {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        .policy-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .policy-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .policy-card ul li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding: 0.3rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .policy-card ul li::before {
+            content: '—';
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 5rem 0 2rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg-primary);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            max-width: 300px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-social a {
+            width: 40px; height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
+        }
+
+        .footer-col h4 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 2rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--accent);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            z-index: 10000;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast i {
+            color: var(--accent);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 90px;
+            left: 0; right: 0;
+            background: rgba(3, 3, 3, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 999;
+            padding: 2rem;
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: 'Teko', sans-serif;
+            font-size: 2rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            transition: color 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent);
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Globe animation */
+        .globe-container {
+            perspective: 1200px;
+            width: 300px;
+            height: 300px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .globe {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: globeRotate 25s linear infinite;
+        }
+
+        .globe-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            border: 1px solid rgba(255, 0, 60, 0.15);
+            border-radius: 50%;
+            transform-style: preserve-3d;
+        }
+
+        .globe-ring:nth-child(1) {
+            width: 300px; height: 300px;
+            margin: -150px 0 0 -150px;
+            transform: rotateX(0deg);
+        }
+        .globe-ring:nth-child(2) {
+            width: 300px; height: 300px;
+            margin: -150px 0 0 -150px;
+            transform: rotateY(60deg);
+        }
+        .globe-ring:nth-child(3) {
+            width: 300px; height: 300px;
+            margin: -150px 0 0 -150px;
+            transform: rotateY(120deg);
+        }
+        .globe-ring:nth-child(4) {
+            width: 300px; height: 300px;
+            margin: -150px 0 0 -150px;
+            transform: rotateX(90deg);
+        }
+        .globe-ring:nth-child(5) {
+            width: 260px; height: 260px;
+            margin: -130px 0 0 -130px;
+            transform: rotateX(45deg) rotateZ(45deg);
+        }
+        .globe-ring:nth-child(6) {
+            width: 260px; height: 260px;
+            margin: -130px 0 0 -130px;
+            transform: rotateX(45deg) rotateZ(135deg);
+        }
+
+        .globe-dot {
+            position: absolute;
+            width: 6px; height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        @keyframes globeRotate {
+            0% { transform: rotateX(15deg) rotateY(0deg); }
+            100% { transform: rotateX(15deg) rotateY(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: flex; }
+
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .dest-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .policies-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .mice-grid { grid-template-columns: 1fr; }
+            .mice-visual { height: 400px; }
+            .mice-content { padding: 3rem 2rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .about-image { height: 400px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 4rem; }
+
+            .section-title { font-size: 3.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .dest-grid { grid-template-columns: 1fr; }
+            .dest-card { height: 300px; }
+            .why-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .about-stats { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+            .section { padding: 5rem 0; }
+            .section-title { font-size: 2.8rem; }
+            .hero-title { font-size: clamp(3rem, 12vw, 5rem); }
+            .hero-subtitle { font-size: 1.1rem; }
+
+            .dest-tabs { flex-wrap: wrap; }
+            .dest-tab { padding: 0.8rem 1.5rem; font-size: 1.2rem; }
+
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Noise Overlay -->
+<div class="noise-overlay"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMsg">Message sent successfully!</span>
+</div>
+
+<!-- Navigation -->
+<nav class="nav" id="navbar">
+    <div class="nav-container">
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-icon"></div>
+            <div class="nav-logo-text">Leading<span>Edge</span></div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#mice">MICE</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Get a Quote</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#destinations">Destinations</a>
+    <a href="#mice">MICE</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav-cta" style="text-align:center;margin-top:1rem;">Get a Quote</a>
+</div>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+    <div class="hero-bg">
+        <img src="https://picsum.photos/seed/travel-luxury-hero/1920/1080.jpg" alt="Luxury Travel">
+    </div>
+    <div class="hero-gradient"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            <i class="fas fa-diamond"></i>
+            Premium Travel Management Since Inception
+        </div>
+        <h1 class="hero-title">
+            Beyond<br><span class="accent">Boundaries</span>
+        </h1>
+        <p class="hero-subtitle">
+            Curating seamless, high-end travel experiences — from corporate MICE events to bespoke luxury holidays across the globe.
+        </p>
+        <div class="hero-buttons">
+            <a href="#destinations" class="btn-primary">
+                <i class="fas fa-compass"></i> Explore Destinations
+            </a>
+            <a href="#services" class="btn-outline">
+                <i class="fas fa-concierge-bell"></i> Our Services
+            </a>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="hero-scroll-line"></div>
+    </div>
+</section>
+
+<!-- Marquee -->
+<section class="marquee-section">
+    <div class="marquee-track">
+        <div class="marquee-item">MICE <span class="sep">◆</span> Luxury Travel <span class="sep">◆</span> Destination Weddings <span class="sep">◆</span> Corporate Events <span class="sep">◆</span> Custom Itineraries <span class="sep">◆</span> Global Network <span class="sep">◆</span> Oman <span class="sep">◆</span> Dubai <span class="sep">◆</span> Rajasthan <span class="sep">◆</span> Indonesia <span class="sep">◆</span></div>
+        <div class="marquee-item">MICE <span class="sep">◆</span> Luxury Travel <span class="sep">◆</span> Destination Weddings <span class="sep">◆</span> Corporate Events <span class="sep">◆</span> Custom Itineraries <span class="sep">◆</span> Global Network <span class="sep">◆</span> Oman <span class="sep">◆</span> Dubai <span class="sep">◆</span> Rajasthan <span class="sep">◆</span> Indonesia <span class="sep">◆</span></div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="section" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-image reveal">
+                <div class="about-image-border"></div>
+                <img src="https://picsum.photos/seed/travel-about-office/800/600.jpg" alt="Leading Edge Travel">
+            </div>
+            <div class="reveal" style="transition-delay: 0.15s;">
+                <div class="section-label">About Us</div>
+                <h2 class="section-title">Crafting<br>Experiences</h2>
+                <div class="about-text">
+                    <p>
+                        Leading Edge Travel Management Pvt. Ltd. is a professional travel management company specializing in customized itineraries, corporate travel (MICE), and niche tourism categories.
+                    </p>
+                    <p>
+                        We focus on providing seamless, high-end travel experiences for both domestic and international clients — backed by a global network of offices in Mumbai, Delhi, Calgary, Hyderabad, and Goa.
+                    </p>
+                </div>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <i class="fas fa-check"></i>
+                        End-to-End Travel Logistics
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check"></i>
+                        Global Office Network (India & Canada)
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check"></i>
+                        Licensed & Professional Tour Guides
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check"></i>
+                        Competitive Industry Connections
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <h4>5+</h4>
+                        <p>Global Offices</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>15+</h4>
+                        <p>Destinations</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>100%</h4>
+                        <p>Custom Itineraries</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>24/7</h4>
+                        <p>Support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="section services-section" id="services">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">What We Do</div>
+            <h2 class="section-title">Core Services</h2>
+            <p class="section-desc">From corporate powerhouses to intimate celebrations — we deliver precision at every scale.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fas fa-building"></i></div>
+                <h3>MICE</h3>
+                <p>Expertise in catering to corporate houses for seminars, conferences, and business events with end-to-end execution — venue selection, travel logistics, and on-ground coordination.</p>
+                <a href="#mice" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal" style="transition-delay: 0.1s;">
+                <div class="service-icon"><i class="fas fa-suitcase-rolling"></i></div>
+                <h3>Custom Holidays</h3>
+                <p>Tailor-made itineraries for domestic and international destinations. Specializing in luxury and niche tourism that transforms your travel dreams into curated realities.</p>
+                <a href="#destinations" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal" style="transition-delay: 0.2s;">
+                <div class="service-icon"><i class="fas fa-ring"></i></div>
+                <h3>Destination Weddings</h3>
+                <p>Professional planning and coordination for dream weddings. Access to a vast network of industry connections to secure competitive deals at stunning venues.</p>
+                <a href="#contact" class="service-link">Plan Yours <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal" style="transition-delay: 0.3s;">
+                <div class="service-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <h3>Sightseeing & Hospitality</h3>
+                <p>Guided tours with licensed professionals for visiting family, friends, or corporate guests. Knowledgeable guides providing historical and anecdotal insights.</p>
+                <a href="#contact" class="service-link">Book a Tour <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Additional Logistics Bar -->
+        <div class="reveal" style="margin-top: 3rem; padding: 2.5rem 3rem; border: 1px solid var(--card-border); background: var(--bg-primary); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+            <div>
+                <h3 style="font-size: 1.8rem; text-transform: uppercase; font-weight: 500; margin-bottom: 0.3rem;">Additional Logistics</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">Flight ticketing, car rentals, and airport/station transfers handled seamlessly.</p>
+            </div>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--text-secondary);">
+                    <i class="fas fa-plane" style="color: var(--accent);"></i>
+                    <span style="font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">Flight Booking</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--text-secondary);">
+                    <i class="fas fa-car" style="color: var(--accent);"></i>
+                    <span style="font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">Car Rentals</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--text-secondary);">
+                    <i class="fas fa-shuttle-van" style="color: var(--accent);"></i>
+                    <span style="font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">Transfers</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Destinations Section -->
+<section class="section" id="destinations">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">Where We Go</div>
+            <h2 class="section-title">Destinations</h2>
+            <p class="section-desc">Detailed itineraries for diverse regions — from spiritual heartlands to coastal paradises and international wonders.</p>
+        </div>
+
+        <div class="destinations-tabs reveal">
+            <button class="dest-tab active" data-tab="domestic">Domestic</button>
+            <button class="dest-tab" data-tab="international">International</button>
+        </div>
+
+        <!-- Domestic Panel -->
+        <div class="dest-panel dest-grid active" id="panel-domestic">
+            <div class="dest-card reveal">
+                <img src="https://picsum.photos/seed/madhya-pradesh-temple/600/400.jpg" alt="Madhya Pradesh">
+                <div class="dest-card-overlay">
+                    <div class="dest-card-arrow"><i class="fas fa-arrow-up-right"></i></div>
+                    <div class="dest-card-tag">Spiritual & Cultural</div>
+                    <h3>Madhya Pradesh</h3>
+                    <p>Ujjain, Maheshwar, and more — explore the spiritual heart of India.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal" style="transition-delay: 0.1s;">
+                <img src="https://picsum.photos/seed/rajasthan-palace-fort/600/400.jpg" alt="Rajasthan">
+                <div class="dest-card-overlay">
+                    <div class="dest-card-arrow"><i class="fas fa-arrow-up-right"></i></div>
+                    <div class="dest-card-tag">Heritage Tours</div>
+                    <h3>Rajasthan</h3>
+                    <p>Jaipur, Udaipur, Jaisalmer — regal grandeur at every turn.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal" style="transition-delay: 0.2s;">
+                <img src="https://picsum.photos/seed/konkan-coast-beach/600/400.jpg" alt="Coastal Maharashtra">
+                <div class="dest-card-overlay">
+                    <div class="dest-card-arrow"><i class="fas fa-arrow-up-right"></i></div>
+                    <div class="dest-card-tag">Coastal Paradise</div>
+                    <h3>Coastal Maharashtra</h3>
+                    <p>Discover the pristine beauty of the Konkan coast.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal" style="transition-delay: 0.1s;">
+                <img src="https://picsum.photos/seed/golden-triangle-india/600/400.jpg" alt="Golden Triangle">
+                <div class="dest-card-overlay">
+                    <div class="dest-card-arrow"><i class="fas fa-arrow-up-right"></i></div>
+                    <div class="dest-card-tag">Classic Route</div>
+                    <h3>Golden Triangle</h3>
+                    <p>Delhi, Agra, Jaipur — the iconic Indian circuit.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal" style="transition-delay: 0.2s;">
+                <img src="https://picsum.photos/seed/goa-sunset-beach/600/400.jpg" alt="Goa">
+                <div class="dest-card-overlay">
+                    <div class="dest-card-arrow"><i class="fas fa-arrow-up-right"></i></div>
+                    <div class="dest-card-tag">Beach & Nightlife</div>
+                    <h3>Goa</h3>
+                    <p>Sun, sand, and serenity — India's favourite coastal escape.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal" style="transition-delay: 0.3s;">
+                <img src="https://picsum.photos/seed/hyderabad-charminar/600/400.jpg" alt="Hyderabad">
+                <div class="dest-card-overlay">
+                    <div class="dest-card-arrow"><i class="fas fa-arrow-up-right"></i></div>
+                    <div class="dest-card-tag">Historic City</div>
+                    <h3>Hyderabad</h3>
+                    <p>Royal heritage, cuisine, and the City of Pearls.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- International Panel -->
+        <div class="dest-panel dest-grid" id="panel-international">
+            <div class="dest-card reveal">
+                <img src="https://picsum.photos/seed/oman-muscat-mosque/600/400.jpg" alt="Oman">
+                <div class="dest-card-overlay">
+                    <div class="dest-card-arrow"><i class="fas fa-arrow-up-right"></i></div>
+                    <div class="dest-card-tag">Featured Destination</div>
+                    <h3>Oman</h3>
+                    <p>Muscat, Jabal Akhdar, Nizwa — extensive tours through Arabia's hidden gem.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal" style="transition-delay: 0.1s;">
+                <img src="https://picsum.photos/seed/dubai-skyline-night/600/400.jpg" alt="Dubai">
+                <div class="dest-card-overlay">
+                    <div class="dest-card-arrow"><i class="fas fa-arrow-up-right"></i></div>
+                    <div class="dest-card-tag">UAE</div>
+                    <h3>Dubai</h3>
+                    <p>Ultra-modern luxury, iconic skylines, and desert adventures.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal" style="transition-delay: 0.2s;">
+                <img src="https://picsum.photos/seed/indonesia-bali-temple/600/400.jpg" alt="Indonesia">
+                <div class="dest-card-overlay">
+                    <div class="dest-card-arrow"><i class="fas fa-arrow-up-right"></i></div>
+                    <div class="dest-card-tag">Southeast Asia</div>
+                    <h3>Indonesia</h3>
+                    <p>Bali and beyond — tropical bliss and cultural richness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MICE Section -->
+<section class="section mice-section" id="mice">
+    <div class="mice-grid">
+        <div class="mice-visual">
+            <img src="https://picsum.photos/seed/corporate-conference-event/900/600.jpg" alt="MICE Events">
+            <div class="mice-visual-overlay"></div>
+        </div>
+        <div class="mice-content reveal">
+            <div class="section-label">Corporate Excellence</div>
+            <h2 class="section-title" style="font-size: 4rem;">MICE<br>Solutions</h2>
+            <p style="color: var(--text-secondary); font-size: 1.05rem;">
+                From intimate board retreats to large-scale exhibitions, we architect corporate experiences that leave lasting impressions. Our MICE division combines strategic planning with flawless execution.
+            </p>
+            <div class="mice-features">
+                <div class="mice-feature">
+                    <div class="mice-feature-num">01</div>
+                    <div>
+                        <h4>Venue Selection</h4>
+                        <p>Curated venues matching your brand identity and event objectives — from luxury resorts to convention centers.</p>
+                    </div>
+                </div>
+                <div class="mice-feature">
+                    <div class="mice-feature-num">02</div>
+                    <div>
+                        <h4>Travel Logistics</h4>
+                        <p>Complete travel management including flight bookings, transfers, accommodation, and ground transportation.</p>
+                    </div>
+                </div>
+                <div class="mice-feature">
+                    <div class="mice-feature-num">03</div>
+                    <div>
+                        <h4>On-Ground Execution</h4>
+                        <p>Dedicated event coordinators ensuring seamless execution from setup to teardown — every detail accounted for.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="section" id="whyus">
+    <div class="container">
+        <div class="section-header reveal" style="text-align: center;">
+            <div class="section-label" style="justify-content: center;">Why Leading Edge</div>
+            <h2 class="section-title">The Advantage</h2>
+            <p class="section-desc" style="margin: 0 auto;">What sets us apart in the world of travel management.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card reveal">
+                <div class="why-card-num">01</div>
+                <h3>Global Presence</h3>
+                <p>Offices in Mumbai, Delhi, Calgary, Hyderabad, and Goa — ensuring local expertise with global reach.</p>
+            </div>
+            <div class="why-card reveal" style="transition-delay: 0.1s;">
+                <div class="why-card-num">02</div>
+                <h3>Deep Industry Connections</h3>
+                <p>Vast network of partners, venues, and service providers ensuring competitive deals and exclusive access.</p>
+            </div>
+            <div class="why-card reveal" style="transition-delay: 0.2s;">
+                <div class="why-card-num">03</div>
+                <h3>Licensed Professionals</h3>
+                <p>Knowledgeable, licensed guides providing historical and anecdotal insights that bring destinations to life.</p>
+            </div>
+            <div class="why-card reveal" style="transition-delay: 0.1s;">
+                <div class="why-card-num">04</div>
+                <h3>End-to-End Execution</h3>
+                <p>From initial consultation to final farewell — every aspect of your journey is meticulously planned and managed.</p>
+            </div>
+            <div class="why-card reveal" style="transition-delay: 0.2s;">
+                <div class="why-card-num">05</div>
+                <h3>Secure & Encrypted</h3>
+                <p>Your personal data — passports, flyer numbers — is handled through encrypted gateways with strict privacy protocols.</p>
+            </div>
+            <div class="why-card reveal" style="transition-delay: 0.3s;">
+                <div class="why-card-num">06</div>
+                <h3>Flexible Payments</h3>
+                <p>Multiple payment options including Cheque, NEFT, RTGS, and IMPS for hassle-free transactions.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="section contact-section" id="contact">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">Get In Touch</div>
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-desc">Reach out to any of our offices worldwide — we're ready to plan your next journey.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-offices">
+                <!-- Head Office -->
+                <div class="office-card reveal">
+                    <h4><i class="fas fa-diamond"></i> Head Office — Mumbai</h4>
+                    <p>3A3, Gundecha Enclave, Kherani Road, Sakinaka, Andheri (East), Mumbai – 400072</p>
+                    <a href="tel:+912267286666"><i class="fas fa-phone" style="margin-right:4px;"></i> +91 22 6728 6666</a><br>
+                    <a href="mailto:ashok@letmglobal.com">ashok@letmglobal.com</a>
+                </div>
+                <!-- Delhi -->
+                <div class="office-card reveal" style="transition-delay: 0.05s;">
+                    <h4><i class="fas fa-diamond"></i> Branch Office — New Delhi</h4>
+                    <p>153, Somdutt Chamber – II. 9, Bhikaji Cama Place, New Delhi – 110066</p>
+                    <a href="tel:+911165656582"><i class="fas fa-phone" style="margin-right:4px;"></i> +91 11 6565 6582</a><br>
+                    <a href="mailto:sanjeev@letmglobal.com">sanjeev@letmglobal.com</a>
+                </div>
+                <!-- Canada -->
+                <div class="office-card reveal" style="transition-delay: 0.1s;">
+                    <h4><i class="fas fa-diamond"></i> Canada Office — Calgary</h4>
+                    <p>Suite 300, 404-6 Avenue SW, Calgary AB T2P 0R9</p>
+                    <a href="tel:+16477121555"><i class="fas fa-phone" style="margin-right:4px;"></i> (+1) 647 712 1555</a><br>
+                    <a href="mailto:farzana@letmglobal.com">farzana@letmglobal.com</a>
+                </div>
+                <!-- Satellite Offices -->
+                <div class="office-card reveal" style="transition-delay: 0.15s;">
+                    <h4><i class="fas fa-diamond"></i> Satellite Offices</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 0.5rem;">
+                        <div>
+                            <p style="font-weight:600; color: var(--text-primary); margin-bottom: 0.2rem;">Mumbai (Churchgate)</p>
+                            <a href="tel:+919820043440">+91 98200 43440</a><br>
+                            <a href="mailto:airclub1@letmglobal.com">airclub1@letmglobal.com</a>
+                        </div>
+                        <div>
+                            <p style="font-weight:600; color: var(--text-primary); margin-bottom: 0.2rem;">Hyderabad</p>
+                            <a href="tel:+919223582111">+91 92235 82111</a><br>
+                            <a href="mailto:resv1@letmglobal.com">resv1@letmglobal.com</a>
+                        </div>
+                        <div>
+                            <p style="font-weight:600; color: var(--text-primary); margin-bottom: 0.2rem;">Goa</p>
+                            <a href="tel:+918433727988">+91 84337 27988</a><br>
+                            <a href="mailto:resv6@letmglobal.com">resv6@letmglobal.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-wrap reveal" style="transition-delay: 0.1s;">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" placeholder="+91 98765 43210">
+                    </div>
+                    <div class="form-group">
+                        <label>Service Interested In</label>
+                        <select required>
+                            <option value="" disabled selected>Select a service</option>
+                            <option>MICE — Corporate Events</option>
+                            <option>Customized Holiday Package</option>
+                            <option>Destination Wedding</option>
+                            <option>City Sightseeing & Hospitality</option>
+                            <option>Flight Ticketing</option>
+                            <option>Car Rental & Transfers</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea placeholder="Tell us about your travel plans..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">
+                        <i class="fas fa-paper-plane"></i> Send Inquiry
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Policies Section -->
+<section class="section" id="policies">
+    <div class="container">
+        <div class="section-header reveal" style="text-align: center;">
+            <div class="section-label" style="justify-content: center;">Important Information</div>
+            <h2 class="section-title">Key Policies</h2>
+        </div>
+        <div class="policies-grid">
+            <div class="policy-card reveal">
+                <h4><i class="fas fa-credit-card"></i> Booking & Payments</h4>
+                <ul>
+                    <li>Payments accepted via Cheque, NEFT, RTGS, or IMPS</li>
+                    <li>All payments in favour of "Leading Edge Travel Management Pvt Ltd"</li>
+                    <li>Booking confirmation subject to payment realization</li>
+                </ul>
+            </div>
+            <div class="policy-card reveal" style="transition-delay: 0.1s;">
+                <h4><i class="fas fa-route"></i> Itinerary Disclaimer</h4>
+                <ul>
+                    <li>Itineraries subject to change due to operational convenience</li>
+                    <li>Weather conditions may alter planned activities</li>
+                    <li>Local conditions may necessitate route modifications</li>
+                    <li>Alternatives of equal value will be provided</li>
+                </ul>
+            </div>
+            <div class="policy-card reveal" style="transition-delay: 0.2s;">
+                <h4><i class="fas fa-shield-alt"></i> Privacy & Requirements</h4>
+                <ul>
+                    <li>Personal data collected strictly for booking purposes</li>
+                    <li>Encrypted gateways used for all transactions</li>
+                    <li>For highly sensitive info, please call directly</li>
+                    <li>Valid Government ID (Aadhaar/Passport) required</li>
+                    <li>Travel insurance mandatory for foreign nationals</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo" style="margin-bottom: 0.5rem;">
+                    <div class="nav-logo-icon"></div>
+                    <div class="nav-logo-text">Leading<span>Edge</span></div>
+                </a>
+                <p>Professional travel management company specializing in customized itineraries, corporate travel, and niche tourism categories worldwide.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">MICE Events</a></li>
+                    <li><a href="#services">Custom Holidays</a></li>
+                    <li><a href="#services">Destination Weddings</a></li>
+                    <li><a href="#services">City Sightseeing</a></li>
+                    <li><a href="#services">Flight Ticketing</a></li>
+                    <li><a href="#services">Car Rentals</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Destinations</h4>
+                <ul>
+                    <li><a href="#destinations">Madhya Pradesh</a></li>
+                    <li><a href="#destinations">Rajasthan</a></li>
+                    <li><a href="#destinations">Golden Triangle</a></li>
+                    <li><a href="#destinations">Coastal Maharashtra</a></li>
+                    <li><a href="#destinations">Oman</a></li>
+                    <li><a href="#destinations">Dubai & UAE</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#policies">Policies</a></li>
+                    <li><a href="#whyus">Why Us</a></li>
+                    <li><a href="mailto:ashok@letmglobal.com">Email Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Leading Edge Travel Management Pvt. Ltd. All rights reserved.</p>
+            <p>CIN: U63040MH2000PTC123456</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+// Mobile Menu Toggle
+const mobileToggle = document.getElementById('mobileToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+
+mobileToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+    const spans = mobileToggle.querySelectorAll('span');
+    if (mobileMenu.classList.contains('active')) {
+        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+    } else {
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+    }
+});
+
+// Close mobile menu on link click
+mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        const spans = mobileToggle.querySelectorAll('span');
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+    });
+});
+
+// Navbar scroll behavior
+let lastScroll = 0;
+const navbar = document.getElementById('navbar');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll > lastScroll && currentScroll > 200) {
+        navbar.style.transform = 'translateY(-100%)';
+    } else {
+        navbar.style.transform = 'translateY(0)';
+    }
+    lastScroll = currentScroll;
+});
+
+// Hero Particles
+const particlesContainer = document.getElementById('heroParticles');
+for (let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDuration = (Math.random() * 8 + 6) + 's';
+    particle.style.animationDelay = (Math.random() * 5) + 's';
+    particle.style.width = (Math.random() * 3 + 1) + 'px';
+    particle.style.height = particle.style.width;
+    particlesContainer.appendChild(particle);
+}
+
+// Destination Tabs
+const destTabs = document.querySelectorAll('.dest-tab');
+const destPanels = document.querySelectorAll('.dest-panel');
+
+destTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        destTabs.forEach(t => t.classList.remove('active'));
+        destPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const target = tab.getAttribute('data-tab');
+        document.getElementById('panel-' + target).classList.add('active');
+
+        // Re-trigger reveal animations for newly visible cards
+        document.querySelectorAll('#panel-' + target + ' .reveal').forEach(el => {
+            el.classList.remove('visible');
+            setTimeout(() => {
+                el.classList.add('visible');
+            }, 50);
+        });
+    });
+});
+
+// Scroll Reveal
+const revealElements = document.querySelectorAll('.reveal');
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Toast function
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    toastMsg.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3500);
+}
+
+// Contact Form
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    showToast('Thank you! Your inquiry has been received. We\'ll get back to you shortly.');
+    e.target.reset();
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const offset = 90;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+</script>
+
+</body>
+</html>

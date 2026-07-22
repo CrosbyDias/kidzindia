@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Packages | Leading Edge & Kids India</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-red: #d32f2f;
+            --brand-red-dark: #b71c1c;
+            --brand-white: #ffffff;
+            --dark-text: #333333;
+            --light-gray: #f8f9fa;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--brand-white);
+            color: var(--dark-text);
+        }
+
+        /* Header Styles */
+        .top-header {
+            padding: 10px 0;
+            border-bottom: 3px solid var(--brand-red);
+            background: rgb(255, 255, 255);
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-img {
+            max-height: 70px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Search Section */
+        .search-nav {
+            background-color: var(--brand-red);
+            padding: 25px 0;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .form-control, .form-select {
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            height: 50px;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--brand-red);
+            box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.15);
+        }
+
+        .btn-search {
+            background-color: white;
+            color: var(--brand-red);
+            font-weight: bold;
+            height: 50px;
+            width: 100%;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .btn-search:hover {
+            background-color: #f1f1f1;
+            color: var(--brand-red-dark);
+        }
+
+        /* Hotel Cards */
+        .hotel-card {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+            background: white;
+            cursor: pointer;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .badge-star {
+            background-color: #ffd700;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .package-price {
+            color: var(--brand-red);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .btn-book {
+            background-color: var(--brand-red);
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-book:hover {
+            background-color: var(--brand-red-dark);
+            color: white;
+            box-shadow: 0 4px 8px rgba(183, 28, 28, 0.3);
+        }
+
+        .section-title {
+            border-left: 5px solid var(--brand-red);
+            padding-left: 15px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        /* Modal Enhancements */
+        .modal-content {
+            border-radius: 12px;
+            border: none;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background-color: var(--brand-red);
+            color: rgb(255, 255, 255);
+            padding: 20px 30px;
+        }
+        
+        .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        .inquiry-header-box {
+            background: #fff5f5;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--brand-red);
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .hotel-gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 0;
+            margin-top: 80px;
+
+        }
+        .card-img-top {
+            height: 350px;             /* Enforces a uniform height across all cards */
+            object-fit: cover;         /* Crops the image perfectly without stretching/distorting */
+            object-position: center;   /* Keeps the focus in the center of the image */
+            width: 100%;               /* Ensures full width within the card container */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="top-header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="header-left">
+                    <img src="lee.jpeg" alt="Leading Edge Global" class="logo-img">
+                </div>
+                <div class="header-right">
+                    <img src="kidzindi.png" alt="Kids India" class="logo-img">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-nav">
+        <div class="container">
+            <h4 class="mb-3 fw-bold">Find Accommodation for Kids India 2027</h4>
+            <form class="row g-2">
+                <div class="col-md-4">
+                    <select class="form-select" id="areaSelect">
+                        <option value="">Select Area</option>
+                        <option value="bkc">BKC (Near Venue)</option>
+                        <option value="juhu">Juhu Beach</option>
+                        <option value="airport">Airport Area</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="starSelect">
+                        <option value="">Hotel Rating</option>
+                        <option value="5">5 Star Luxury</option>
+                        <option value="4">4 Star Business</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Check-in Date" onfocus="(this.type='date')">
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-search" onclick="filterHotels()">SEARCH</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title">Exclusive Mumbai Hotel Packages</h2>
+                <p class="text-muted lead">Managed by Leading Edge Global - Official Travel Partner.</p>
+            </div>
+        </div>
+
+        <div class="row g-4" id="hotelListing">
+            <!-- Hotel 1 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="bkc" data-stars="5">
+                <div class="hotel-card" onclick="openDetails('Sofitel Mumbai BKC')">
+                    <img src="https://www.ahstatic.com/photos/6451_ho_00_p_2048x1536.jpg?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">5 ★</span>
+                            <span class="text-muted small fw-bold">BKC Area</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Sofitel Mumbai BKC</h5>
+                        <p class="card-text small text-muted">Luxury French elegance combined with Indian hospitality, located in the heart of BKC.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>5 mins to Jio World Centre</li>
+                            <li>Kids India Delegate Rates</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹12,500 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 2 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="bkc" data-stars="5">
+                <div class="hotel-card" onclick="openDetails('Trident Bandra Kurla')">
+                    <img src="https://www.thehotelguru.com/_images/f1/26/f126e9f43787e87c2dce0f67b465f973/s1654x900.jpg?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">5 ★</span>
+                            <span class="text-muted small fw-bold">BKC Area</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Trident Bandra Kurla</h5>
+                        <p class="card-text small text-muted">Efficient business luxury with exceptional facilities for international delegates.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>Walkable to Exhibition</li>
+                            <li>24/7 Business Concierge</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 3 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="near_bkc" data-stars="5">
+                <div class="hotel-card" onclick="openDetails('Grand Hyatt Mumbai')">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/85/b8/99/caption.jpg?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">5 ★</span>
+                            <span class="text-muted small fw-bold">Santacruz</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Grand Hyatt Mumbai</h5>
+                        <p class="card-text small text-muted">A vast lifestyle destination. Features resort-style amenities, gardens, and diverse restaurants.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>~10 mins to JWCC</li>
+                            <li>Large Exhibition Space / Gardens</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹16,500 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 4 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="airport_t1" data-stars="5">
+                <div class="hotel-card" onclick="openDetails('Taj Santacruz')">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/37/4a/dc/outdoor-swimming-pool.jpg?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">5 ★</span>
+                            <span class="text-muted small fw-bold">Santacruz East</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Taj Santacruz</h5>
+                        <p class="card-text small text-muted">Luxury at T1. Direct access to Domestic Terminal with rooms overlooking the runway.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>Adjacent to T1 Airport</li>
+                            <li>Luxury Club & City Views</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hotel 5 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="airport_t1" data-stars="5">
+                <div class="hotel-card" onclick="openDetails('Sahara Star')">
+                    <img src="https://www.tripurastarnews.com/wp-content/uploads/2025/06/Beer-Island-Sahara-Star-1024x576.jpeg?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">5 ★</span>
+                            <span class="text-muted small fw-bold">Vile Parle E (T1)</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Sahara Star</h5>
+                        <p class="card-text small text-muted">Known for its iconic glass architecture and massive indoor lagoon. Business convenience at T1.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>Adjacent to T1 Airport</li>
+                            <li>Large Internal Lagoon Views</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hotel 6 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="airport_t1" data-stars="5">
+                <div class="hotel-card" onclick="openDetails('Orchid Mumbai')">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmW5LgXT_xEODyHODqrdDHPTnC0cRWj9mxnww19aAxxSQAEi3NK1IdvXFmNPmU-2MbuBa9upOu1x1SUyxwFaAF7vQhT9QE7eyR26rGhjqBXWLyJrV83K61IuLS_q7EDsFVnZTC2=s1360-w1360-h1020-rw?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">5 ★</span>
+                            <span class="text-muted small fw-bold">Vile Parle E (T1)</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Orchid Mumbai</h5>
+                        <p class="card-text small text-muted">Asia’s first certified eco-friendly 5-star hotel. Sustainable luxury near the domestic terminal.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>Near T1 Airport</li>
+                            <li>Eco-Friendly Certification</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hotel 7 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="airport_t2" data-stars="5">
+                <div class="hotel-card" onclick="openDetails('The Novotel Mumbai Intl Airport')">
+                    <img src="https://www.novotelmumbaiinternationalairport.com/wp-content/uploads/sites/30/2023/04/Swimming-Pool-copy-1920x1200.jpg?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">5 ★</span>
+                            <span class="text-muted small fw-bold">Andheri E (T2)</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Novotel Intl Airport</h5>
+                        <p class="card-text small text-muted">Efficient and modern business hub near T2. Reliable international standards of service.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>Near T2 International Airport</li>
+                            <li>Modern Business Facilities</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hotel 8 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="near_bkc" data-stars="4">
+                <div class="hotel-card" onclick="openDetails('Lemon Tree Hotel Kalina')">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkrn3AMxJSwKhMqvflmxIqPWOff0Ba2cZ5P_Z-qhS5UBAwfqS85wv3Pj4HhlF87Y2ke9teV0DoGidcvX05nMz1E9PpNFqxdcGrCXcY8lAmCRLQaaBp9d7oy3ko0cI3rNprjMQTm=s1360-w1360-h1020-rw?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">4 ★</span>
+                            <span class="text-muted small fw-bold">Santacruz</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Lemon Tree Hotel Kalina</h5>
+                        <p class="card-text small text-muted">Bright, upbeat midscale hotel near BKC. Offers modern rooms and reliable business services.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>~10 mins to JWCC</li>
+                            <li>Upbeat, Modern Design</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hotel 9 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="weh" data-stars="4">
+                <div class="hotel-card" onclick="openDetails('Bloom HUB WEH')">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkR-ZY3CZYwV7rZs8Jn_JKKkdw_dzj-rD4yr_tLbqRUKegaMxeN_zCpg51vjOnJlaXVRH-V1kvZTCrYD6DSxxiLSCSgSrHeBXl-ULTkhs0OxkleA5CqRAc2Zl9vS2hbsVaD2_Zv=s1360-w1360-h1020-rw?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">4 ★</span>
+                            <span class="text-muted small fw-bold">Andheri/WEH</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Bloom HUB WEH</h5>
+                        <p class="cardalk-text small text-muted">Reliable boutique comfort on the Western Express Highway. Easy access for commuting.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>On Western Express Highway</li>
+                            <li>Boutique Mid-scale Comfort</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hotel 10 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="near_bkc" data-stars="5">
+                <div class="hotel-card" onclick="openDetails('ibis Mumbai BKC')">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnfRtOsp73E0y9vPdYjkz-0de9YI8VcMIRs3OI0CqHOiT8XC_X7doJh2YQQ1804rdcRh5XFwMXkPNCBxVPhWiWIe6o6iXL-9QVFenolHHP0J7_-kDvvoYzDaaAiDO0l6nyurmrSp1XKHmlz=s1360-w1360-h1020-rw?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">5 ★</span>
+                            <span class="text-muted small fw-bold">BKC Area</span>
+                        </div>
+                        <h5 class="card-title fw-bold">ibis Mumbai BKC</h5>
+                        <p class="card-text small text-muted">Efficient, standard international comfort. Positioned strategically for BKC business.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>~5 mins to JWCC</li>
+                            <li>International Economy Brand</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hotel 11 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="near_bkc" data-stars="3">
+                <div class="hotel-card" onclick="openDetails('Indie Stay Kalina BKC')">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmLGtwjdTjp6mCwzhRRqefyqB9DjHzx_e0ukIDXZSJrojbgPS_JzU7BXCGYesjzUWzbaBQ9QO85RS57wy_7l5vqS_EZFlr9qLLly9TMF1mok5x7CnCGsL6em5h2_-nErooOxQD2cg=s1360-w1360-h1020-rw?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">3 ★</span>
+                            <span class="text-muted small fw-bold">Santacruz</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Indie Stay Kalina BKC</h5>
+                        <p class="card-text small text-muted">Independent boutique charm near BKC. Focuses on personalized service and local style.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>~8 mins to JWCC</li>
+                            <li>Unique Boutique Design</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hotel 12 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="near_bkc" data-stars="3">
+                <div class="hotel-card" onclick="openDetails('Bloom Hotel Kalina')">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmY1xc9ziV4upafl8PruKH754TCqF6CozWfCL5R7cLNi9PETmRcTkx-znGkeC9rggZUuE4jEethsIFN6udhFajMu294p82TrpKgTGbBvzVw1EjTvSpKjr3drTlATRsXHnNMJ8tzhrLdHe-E=s1360-w1360-h1020-rw?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">3 ★</span>
+                            <span class="text-muted small fw-bold">Santacruz</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Bloom Hotel Kalina</h5>
+                        <p class="card-text small text-muted">Efficient and recognizable boutique comfort near BKC Annex. Focused on practicality.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>~10 mins to JWCC</li>
+                            <li>Efficient Boutique Rooms</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hotel 13 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="kurla" data-stars="3">
+                <div class="hotel-card" onclick="openDetails('Kohinoor Elite, Kurla')">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkR-lK0bmIDi73BU8Mmmad5alIRfeCrj7X_948TOIiqAa5H2ik1CcCzK0puvp6Xm9EireKVnRc40bz0Lynf1PK_Brql69BCJ8CrZbZQajLo3RHADWe1emMxgG6OSCBAV-MdUn312Vurk0E=s1360-w1360-h1020-rw?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">3 ★</span>
+                            <span class="text-muted small fw-bold">Kurla West</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Kohinoor Elite</h5>
+                        <p class="card-text small text-muted">A reliable economy hotel in Kurla West, providing practical lodging near BKC.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>Near BKC/Kurla West</li>
+                            <li>Efficient Business Stays</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hotel 14 -->
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="airport_t1" data-stars="3">
+                <div class="hotel-card" onclick="openDetails('Bawa International')">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn9ZCn022grxM1oJg0-_amT4UpRkR26jwNUjHaWO7dr_MitZ6nnNqKNzPtA_GoyiZ9akUKBnWoUrQUoRiqSfA9T5Az1AYj0DVTHZ63i7ja5KWUv0H04tkoqfoVTReDQBlWeQhD7=s1360-w1360-h1020-rw?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge badge-star">3 ★</span>
+                            <span class="text-muted small fw-bold">Vile Parle E (T1)</span>
+                        </div>
+                        <h5 class="card-title fw-bold">Bawa International</h5>
+                        <p class="card-text small text-muted">Reliable business comfort at T1 airport. Known for hospitality and practical location.</p>
+                        <ul class="small mb-3 text-secondary">
+                            <li>Near T1 Airport</li>
+                            <li>Practical Domestic Commute</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
+                            <span class="text-primary small fw-bold">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+
+    <!-- Details Modal -->
+    <div class="modal fade" id="hotelDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="detailModalLabel">Hotel Name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row hotel-gallery mb-4">
+                        <div class="col-md-6"><img src="" id="img1" class="img-fluid" alt="Room"></div>
+                        <div class="col-md-6"><img src="" id="img2" class="img-fluid" alt="Amenities"></div>
+                    </div>
+                    <div id="hotelFullDesc"></div>
+                </div>
+                <div class="modal-footer bg-light p-3">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-book px-5" onclick="openInquiry()">Inquire</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Professional Inquiry Modal -->
+    <div class="modal fade" id="inquiryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title fw-bold">Rate Request Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="inquiry-header-box">
+                        <p class="mb-0 small fw-bold text-danger">Please fill in your details to receive the Kids India Special Group Tariff and availability status for your selected hotel.</p>
+                    </div>
+                    
+                    <form id="inquiryForm" class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control bg-light" placeholder="John" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control bg-light" placeholder="Doe" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Corporate Email</label>
+                            <input type="email" class="form-control bg-light" placeholder="john.doe@company.com" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Mobile Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white">+91</span>
+                                <input type="tel" class="form-control bg-light" placeholder="98765 43210" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Hotel Selection</label>
+                            <select class="form-select bg-light" id="interestedHotel" required>
+                                <option value="Sofitel Mumbai BKC">Sofitel Mumbai BKC</option>
+                                <option value="Trident Bandra Kurla">Trident Bandra Kurla</option>
+                                <option value="JW Marriott Juhu">JW Marriott Juhu</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-book w-100 py-3 shadow-sm">SEND REQUEST</button>
+                            <p class="text-center mt-3 mb-0 small text-muted">A Leading Edge consultant will contact you within 4 business hours.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message (Floating) -->
+    <div id="successToast" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1060; display:none;">
+        <div class="bg-success text-white p-3 rounded shadow-lg d-flex align-items-center">
+            <span class="me-2">✓</span> Inquiry submitted successfully!
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <h5 class="fw-bold mb-3">Leading Edge Global</h5>
+                    <p class="small text-secondary mb-0">Partnered with Kids India for 10+ years. Delivering excellence in MICE and hospitality logistics across Mumbai.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-4 mt-md-0">
+                    <p class="small text-secondary mb-1">© 2025 All Rights Reserved.</p>
+                    <a href="#" class="text-white-50 text-decoration-none small me-3">Privacy</a>
+                    <a href="#" class="text-white-50 text-decoration-none small">Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS for Logic -->
+    <script>
+        const hotelData = {
+            'Sofitel Mumbai BKC': {
+                desc: 'Sofitel Mumbai BKC blends French "art de vivre" with Indian culture. Strategically located for trade fairs at Jio World Centre.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnsxjgsVEOdgIdHYFzXrgQVNS-1s5jgCf6j8FnoiNqK6AKwrUwjUBKYuNBUf41jhy4QqCI26tgnh4b3hX8bBclIxc6CyA4-5W4eRfCilptpKYtPUgomNjXD8T-GPhCCeu7DEpMP=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkwcoo0-eKFXa07nedxUz1d_-C9U2wXD_bf1jajcVOD__u81GyXjcAKdRzVEBQAlYJFLV6QTYjpTLLgrJ3yr2tY0RI3R65OkRx9vseqocagq343teatYPT0zvVsdj9dI2zpM6Q4=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'Trident Bandra Kurla': {
+                desc: 'A premium business hotel offering spacious rooms and unparalleled efficiency for the global exhibitor.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkSJeksddRWb11ccfvtWWrSDWcRIfRV8HkHVAer9IlwZ_MtCsvhVopgmvh_mxrpLprnlidEz0xcAvInZ0tVIiexlm80wQXw4QNSe2beiAepWqsRcvEagBz77xFIg_ybA3HzGkyB=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk-1ENfFmdQXwnsk-t_MmSfmOSbtskhag_4VWbj-EN1gwa3W7EOSpG7VTUmm7NbBzgcYwQ2XfeUTj1Dx-FEvpacLyWxjrJCJvdX2EbM6ChC1oworazejwnZ3ZVvSMvCU3vmmKI=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'Grand Hyatt Mumbai': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://lh3.googleusercontent.com/proxy/wEpu_WBlRBDBjLdINefHS4RpiXpG1t1WKVY-4tMvD4HxnA90D18OqpX-u0l9fm8bP1ob4rKYcvjqoOLPGAbA-IoJkHtj-lqRN7A76FnzI4JX5RZEWIfE_cJCnLSDnOParTgMEQx8WaiFVPDGFrfB_EGvtAAa3A=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnrETDE0PqRei3LgcXfDtJubO5R0ttzb8hAljC8DAxCZPCkeKQ5zWIBq4OBvTxQw-SpBwD5JB6UkzhM-fIxRnrrZXSoosnQoI2vh6txSF4ndw-A1pYG5kABORW3F2jbZtTAaaZT9A=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'Taj Santacruz': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm4pQp9e8MggREFz_6dHFy06Q_siSeCawCK52OuE6-8c-wlf7dr9c9ahlKHsP89rCuMnPszKGCATzGJUlIczkenZbPyVH5hYFHJgrvsDeJDL_mOrEAqY2oWdhrArJja5tVsKWYnOuWCnBZk=w243-h174-n-k-no-nu?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWniUd4dJKtnvsV7fGpgmjFxJzoy63y3JbhHGAoU0prigf-bf2G7rUrQImDq701jIW16kZKoud76Ic1yfbmIbGRmO_bh-J0CQPABTwDzFjyaY3uN4ce6P2FELBVMitHLmZ2KzxgrFQ=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'Sahara Star': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://lh3.googleusercontent.com/proxy/t6ZqGw6qcX5efKyyJNs2kYeWauHrPr-2OUdyHhAhUlotYtpi9uEiLHfTxF5EcHgfXQBden1mnULzshAJxwplSpbaETFfOwrHHKbGZmdN9ugDdYx_sGbAL6rxzrOHToibzHRvFPbxidMcHfwUJxlbvob935X79Ng=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmlaOTTY5fBZqHeqVGeBtMeCByjQIGXu6Xn8Q-1xu6mcM7z0iw4iiKgegcVc-F4-fn5ZKBHKQa6TppEuNHW8hsMaYiHj0zCWWgLbnxlP_9QO0C_LL4O1FLECxi5lPyW6-d14iE=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'Orchid Mumbai': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://lh3.googleusercontent.com/proxy/YbpPPwsJE_JEzxTz5fAXyf0Mys6osxrnTbcwfcxkEkBlZzVzPWdbsXOhOFIaG2Y6INbKZyyC5atSc9i35hUPS229QJMLN4k8fL9UBdS9CKXQzKNDF-dNNY6mFsnGfKzlz4ynl_0AvvzY8nxpFqYehLdwfyIxWqc=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmNgfrxq0FsVMpfwJqjPOfeWEe9yMPmCdH4eW8crTo6WKccusjOAeGBRsvaVSr3v_5zZFTSBrf0LNMJ_UOjFhHQ9G9c42tq5mRInYiSuwMKUf-6TRp6U8qc1qeekWf5xN62T6jd4g=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'The Novotel Mumbai Intl Airport': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkXbzVaUOCqbxzilzE9vnSaMh8jPXlUYC3porrB_-WeIEoGA2CWxOIjPqKe8YvWG9EYbrUuqDxabiz03nxac9lGohpbUZUEe_U0czd_bHnzcHzR_HdSiAzPf_sNXEns8yHryy1WDg=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkbcb64FGemIEfabLELUeyJ4PqSMlEVe2H3CB2o2zjPsFgb9LIpxD_4IKCyPAshrIGb36VLO5-ojt4W8DVXnxKzSdRHYUJe7NRtpM9WreKLUIlVvhuc1qaiJ4wKNsdiZBBtDjyP=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'Lemon Tree Hotel Kalina': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://lh3.googleusercontent.com/proxy/3ronVAUdTy8ROE-zDJDLdLqRwnFbPeDjGAPnjPcaom0b1K4gcaP8Asu4hTim93PAztOkzmhglCIojlPVuiO4wtPiF6txJCOjeBC3jFTEMtBO_aIShhVlmA0TvUsmDv7iC8g3kmUjBL_HXiW-jN-Cw0ZL9r1LLr0=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnA3aW7U4CUsBX47yNSZtvXlF_CZFCBqWq1LjmkICkixxn5_A_z6S9N0EtnZlEbXolAFtZ3Tp7hzt6qWRQme2L7Ag3dDsOYNCrjXyw7LM-IoCzGZLnXT28lnrBoOuzL-Vs4mh98=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'Bloom HUB WEH': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnBaxADhYTK_X-547bzzoroUvfWaZ8lz29BAYSFqG1wUR6aEjxJdNKS_e23TSfGWCT_Elmkrzem-7ExrCH3e4-vANRIbZjghbnVMnUb9lYhx7ZRdA3sgLQ89sE0eYb-gwI9Kss=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn6sceSS2hoVL-8K5bymaX38Da--i6Llg5s37O2urdLMBGQB0323QDppK6ahELI3lsQ-o8XGyq2PXaweiekXGwWepALf908i4kjvkJEgSQKjkcfGDtkeGae0Zl_DWid88WNTpBMY2ffLfiD=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'ibis Mumbai BKC': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80'
+            },
+            'Indie Stay Kalina BKC': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn2eTVyJ_WhPZG4tW4Rp11ygFTBWrkse6C9KmhhpMto7Uf9uHUh_HzaAsmHevSdZGD6PySeAxzobPwRTbJoaRIVbg9tbGiytzC8TnstctRSl78t3iBwzjMc8id1Rm79xct-GRo=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm38zplSrGNk8u6kYw58hF52Am3JdJ-QQ5PVtIfLg1Y2mwpCk0d6_UO8HZekYx2Vs0fqw3I59CzUZ4grcYFEW8zz23kBGMRSB4QU8pS4HBvrp--eVYVVSHc6_g-q5zL2_S7EoRWJQ=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'Bloom Hotel Kalina': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmH-SnDx1vPpH1tGMhHL9vpx39OI9_5nL5_hPIxd6jXIj45NNsq7WMZQTfe_Xl0O0J1MgORnB7UELOg51-UYHGUGhzIW4lHmfeW9sp2oYfvke_yG-mMbF2Hjm_9DVZHN0wfa0eSWi2WSWU=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlprNCHII6vIySlKAkWaeKtHq5ycztvtYF_J0sRanKCrAQ6aOKGFdsKX7GcWyE2nH2h3haEImg8ZOR3_UDe9tMHxjIIZ-8tTVCf2dqefaQVcbAFxWxt92xHYZWlOFOSZjxets1jsC9ylSAQ=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'Kohinoor Elite, Kurla': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmyN9gR7NA-_46V0daNCUl-Y-bszUBxQlZICgHp6Q2YPSCYCHLP43enjPTyZdnkGm9aTu5sgX5GxPyIgtvatMQYt-wqKcphCrIEnPvofIM9-2B7g1_XgQXUSZDp8S2jfLOzY4fa=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWl1dL4CwPJsXIJXSUII3IMUQasM45pNxsvO0xv45Jqdgve_qIxT1Ov7yefb5IkY04VCxPUcxeFot4m9PD1ma6Eafb4IVln-aEeju_HIlrPZAX6wvHWWRRVGLVP3ySxGyPSwtFLz8GcJsb78=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            },
+            'Bawa International': {
+                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnFN9eWFvNLvo-ybXvKkY1muM3eLcoXV5I_r9DkddfK0jcf5ZEUuLPXeS0SJZjgzBgT2O8U4uYTkAgiHObDiNpEB58ssD-4PAmyXtsUtbD2Jw2hwbTxE8cCcuGpvr2YXriZhRI=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkz81O1-CSkEnNKVcwcjSe1drIDwrFbWOySiU6lafaJFcPc_R87UCpEkElMBfANThoWni9nxglejnGMYhT5XkRIQmDCcB8kTI_qAJuUKOrSvH1euN1aeQ0xKvEMd2kqyMnS_t1XQhw3WYqe=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
+            }
+
+        };
+
+        let currentDetailModal, currentInquiryModal;
+
+        window.onload = () => {
+            currentDetailModal = new bootstrap.Modal(document.getElementById('hotelDetailModal'));
+            currentInquiryModal = new bootstrap.Modal(document.getElementById('inquiryModal'));
+        };
+
+        function openDetails(name) {
+            const data = hotelData[name];
+            document.getElementById('detailModalLabel').innerText = name;
+            document.getElementById('img1').src = data.img1;
+            document.getElementById('img2').src = data.img2;
+            document.getElementById('hotelFullDesc').innerHTML = `<h6 class="fw-bold mb-3">About the Property</h6><p class="text-secondary">${data.desc}</p><div class="row mt-4"><div class="col-6"><ul class="small"><li>Complimentary Breakfast</li><li>Shuttle Service</li></ul></div><div class="col-6"><ul class="small"><li>High Speed Wi-Fi</li><li>Fitness Center</li></ul></div></div>`;
+            document.getElementById('interestedHotel').value = name;
+            currentDetailModal.show();
+        }
+
+        function openInquiry() {
+            currentDetailModal.hide();
+            setTimeout(() => currentInquiryModal.show(), 300);
+        }
+
+        document.getElementById('inquiryForm').onsubmit = (e) => {
+            e.preventDefault();
+            currentInquiryModal.hide();
+            const toast = document.getElementById('successToast');
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 4000);
+            e.target.reset();
+        };
+
+        function filterHotels() {
+            const area = document.getElementById('areaSelect').value;
+            const stars = document.getElementById('starSelect').value;
+            const items = document.querySelectorAll('.hotel-item');
+            items.forEach(item => {
+                const itemArea = item.getAttribute('data-area');
+                const itemStars = item.getAttribute('data-stars');
+                item.style.display = (!area || area === itemArea) && (!stars || stars === itemStars) ? 'block' : 'none';
+            });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
