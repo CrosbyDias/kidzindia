@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Packages | Leading Edge & Kids India</title>
+    <title>Hotel Packages & Tariffs | Leading Edge & Kids India</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
@@ -16,6 +16,8 @@
             --dark-text: #333333;
             --light-gray: #f8f9fa;
             --border-color: #e0e0e0;
+            --table-header-bg: #333333;
+            --table-cat-bg: #8e8e8e;
         }
 
         body {
@@ -78,6 +80,84 @@
             color: var(--brand-red-dark);
         }
 
+        .tariff-section {
+            margin-top: 35px;
+            margin-bottom: 50px;
+        }
+
+        .tariff-table-wrapper {
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            overflow-x: auto;
+            border: 1px solid #d0d0d0;
+        }
+
+        .tariff-table {
+            width: 100%;
+            margin-bottom: 0;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        .tariff-table th {
+            background-color: var(--table-header-bg);
+            color: #ffffff;
+            font-weight: 600;
+            text-align: center;
+            padding: 14px 10px;
+            border: 1px solid #4d4d4d;
+            white-space: nowrap;
+        }
+
+        .tariff-table td {
+            padding: 12px 10px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #e2e2e2;
+            color: #333333;
+        }
+
+        .tariff-table td.hotel-name-cell {
+            text-align: left;
+            font-weight: 500;
+            padding-left: 20px;
+            color: #222222;
+        }
+
+        .tariff-table td.hotel-name-cell a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .tariff-table td.hotel-name-cell a:hover {
+            color: var(--brand-red);
+            text-decoration: underline;
+        }
+
+        .tariff-table tr.category-row td {
+            background-color: var(--table-cat-bg);
+            color: #ffffff;
+            font-weight: 700;
+            text-align: center;
+            font-size: 0.95rem;
+            padding: 8px;
+            border: 1px solid var(--table-cat-bg);
+            letter-spacing: 0.3px;
+        }
+
+        .tariff-table tbody tr.hotel-row:hover {
+            background-color: #f4f6f8;
+            cursor: pointer;
+        }
+
+        .currency-symbol {
+            font-size: 0.85rem;
+            color: #666;
+            margin-right: 2px;
+        }
+
         /* Hotel Cards */
         .hotel-card {
             border: 1px solid #eee;
@@ -125,7 +205,7 @@
         .section-title {
             border-left: 5px solid var(--brand-red);
             padding-left: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-weight: 700;
         }
 
@@ -173,13 +253,13 @@
             color: white;
             padding: 60px 0;
             margin-top: 80px;
-
         }
+
         .card-img-top {
-            height: 350px;             /* Enforces a uniform height across all cards */
-            object-fit: cover;         /* Crops the image perfectly without stretching/distorting */
-            object-position: center;   /* Keeps the focus in the center of the image */
-            width: 100%;               /* Ensures full width within the card container */
+            height: 350px;
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
         }
     </style>
 </head>
@@ -190,10 +270,10 @@
         <div class="container">
             <div class="logo-container">
                 <div class="header-left">
-                    <img src="lee.jpeg" alt="Leading Edge Global" class="logo-img">
+                    <img src="lee.jpeg" alt="Leading Edge Global" class="logo-img" onerror="this.onerror=null; this.src='https://placehold.co/200x70/d32f2f/ffffff?text=Leading+Edge';">
                 </div>
                 <div class="header-right">
-                    <img src="kidzindi.png" alt="Kids India" class="logo-img">
+                    <img src="kidzindi.png" alt="Kids India" class="logo-img" onerror="this.onerror=null; this.src='https://placehold.co/200x70/333333/ffffff?text=Kids+India';">
                 </div>
             </div>
         </div>
@@ -208,8 +288,11 @@
                     <select class="form-select" id="areaSelect">
                         <option value="">Select Area</option>
                         <option value="bkc">BKC (Near Venue)</option>
-                        <option value="juhu">Juhu Beach</option>
-                        <option value="airport">Airport Area</option>
+                        <option value="near_bkc">BKC Annex / Kalina / Santacruz</option>
+                        <option value="airport_t1">Airport Area (T1 Domestic)</option>
+                        <option value="airport_t2">Airport Area (T2 International)</option>
+                        <option value="kurla">Kurla West</option>
+                        <option value="weh">Western Express Highway</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -217,6 +300,7 @@
                         <option value="">Hotel Rating</option>
                         <option value="5">5 Star Luxury</option>
                         <option value="4">4 Star Business</option>
+                        <option value="3">3 Star Standard</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -231,13 +315,171 @@
 
     <!-- Main Content -->
     <main class="container my-5">
+        
+        <!-- Tariff Comparison Table Section -->
+        <section class="tariff-section">
+            <div class="d-flex justify-content-between align-items-end mb-3">
+                <div>
+                    <h2 class="section-title mb-1">Official Hotel Tariff Summary</h2>
+                    <p class="text-muted small mb-0">Special negotiated delegate tariffs for Kids India. Click any hotel row to view details or request rates.</p>
+                </div>
+            </div>
+
+            <div class="tariff-table-wrapper">
+                <table class="tariff-table" id="tariffTable">
+                    <thead>
+                        <tr>
+                            <th>Hotel</th>
+                            <th>Room Category</th>
+                            <th>Hotel Category</th>
+                            <th>Distance from Venue</th>
+                            <th>Tariff (SGL)</th>
+                            <th>Tariff (DBL)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 3 Star Hotels Header -->
+                        <tr class="category-row" data-category="3">
+                            <td colspan="6">3 Star Hotels</td>
+                        </tr>
+                        <!-- 3 Star Hotel Rows -->
+                        <tr class="hotel-row" data-area="near_bkc" data-stars="3" onclick="openDetails('Indie Stay Kalina BKC')">
+                            <td class="hotel-name-cell">Indie Stay Kalina BKC</td>
+                            <td>Base Category</td>
+                            <td>3 Star</td>
+                            <td>2.8 Km</td>
+                            <td>₹ 6,500</td>
+                            <td>₹ 7,200</td>
+                        </tr>
+                        <tr class="hotel-row" data-area="near_bkc" data-stars="3" onclick="openDetails('Bloom Hotel Kalina')">
+                            <td class="hotel-name-cell">Bloom Hotel – BKC Kalina</td>
+                            <td>Base Category</td>
+                            <td>3 Star</td>
+                            <td>3.1 Km</td>
+                            <td>₹ 9,400</td>
+                            <td>₹ 9,900</td>
+                        </tr>
+                        <tr class="hotel-row" data-area="kurla" data-stars="3" onclick="openDetails('Kohinoor Elite, Kurla')">
+                            <td class="hotel-name-cell">Kohinoor Elite</td>
+                            <td>Base Category</td>
+                            <td>3 Star</td>
+                            <td>4.5 Km</td>
+                            <td>₹ 9,900</td>
+                            <td>₹ 10,999</td>
+                        </tr>
+                        <tr class="hotel-row" data-area="airport_t1" data-stars="3" onclick="openDetails('Bawa International')">
+                            <td class="hotel-name-cell">Bawa International</td>
+                            <td>Base Category</td>
+                            <td>3 Star</td>
+                            <td>6.3 Km</td>
+                            <td>₹ 6,800</td>
+                            <td>₹ 7,500</td>
+                        </tr>
+
+                        <!-- 4 Star Hotels Header -->
+                        <tr class="category-row" data-category="4">
+                            <td colspan="6">4 Star Hotels</td>
+                        </tr>
+                        <!-- 4 Star Hotel Rows -->
+                        <tr class="hotel-row" data-area="near_bkc" data-stars="4" onclick="openDetails('Lemon Tree Hotel Kalina')">
+                            <td class="hotel-name-cell">Lemon Tree Hotel Kalina</td>
+                            <td>Base Category</td>
+                            <td>4 Star</td>
+                            <td>3.0 Km</td>
+                            <td>₹ 10,500</td>
+                            <td>₹ 11,500</td>
+                        </tr>
+                        <tr class="hotel-row" data-area="near_bkc" data-stars="4" onclick="openDetails('ibis Mumbai BKC')">
+                            <td class="hotel-name-cell">ibis Mumbai BKC</td>
+                            <td>Base Category</td>
+                            <td>4 Star</td>
+                            <td>2.0 Km</td>
+                            <td>₹ 9,800</td>
+                            <td>₹ 10,800</td>
+                        </tr>
+                        <tr class="hotel-row" data-area="weh" data-stars="4" onclick="openDetails('Bloom HUB WEH')">
+                            <td class="hotel-name-cell">Bloom HUB WEH</td>
+                            <td>Base Category</td>
+                            <td>4 Star</td>
+                            <td>7.5 Km</td>
+                            <td>₹ 8,900</td>
+                            <td>₹ 9,800</td>
+                        </tr>
+
+                        <!-- 5 Star Hotels Header -->
+                        <tr class="category-row" data-category="5">
+                            <td colspan="6">5 Star Hotels</td>
+                        </tr>
+                        <!-- 5 Star Hotel Rows -->
+                        <tr class="hotel-row" data-area="bkc" data-stars="5" onclick="openDetails('Trident Bandra Kurla')">
+                            <td class="hotel-name-cell">Trident Bandra Kurla</td>
+                            <td>Base Category</td>
+                            <td>5 Star</td>
+                            <td>1.0 Km</td>
+                            <td>₹ 15,500</td>
+                            <td>₹ 17,000</td>
+                        </tr>
+                        <tr class="hotel-row" data-area="bkc" data-stars="5" onclick="openDetails('Sofitel Mumbai BKC')">
+                            <td class="hotel-name-cell">Sofitel Mumbai BKC</td>
+                            <td>Base Category</td>
+                            <td>5 Star</td>
+                            <td>1.2 Km</td>
+                            <td>₹ 16,000</td>
+                            <td>₹ 17,500</td>
+                        </tr>
+                        <tr class="hotel-row" data-area="near_bkc" data-stars="5" onclick="openDetails('Grand Hyatt Mumbai')">
+                            <td class="hotel-name-cell">Grand Hyatt Mumbai</td>
+                            <td>Base Category</td>
+                            <td>5 Star</td>
+                            <td>3.5 Km</td>
+                            <td>₹ 14,500</td>
+                            <td>₹ 16,000</td>
+                        </tr>
+                        <tr class="hotel-row" data-area="airport_t1" data-stars="5" onclick="openDetails('Taj Santacruz')">
+                            <td class="hotel-name-cell">Taj Santacruz</td>
+                            <td>Base Category</td>
+                            <td>5 Star</td>
+                            <td>6.0 Km</td>
+                            <td>₹ 15,000</td>
+                            <td>₹ 16,500</td>
+                        </tr>
+                        <tr class="hotel-row" data-area="airport_t1" data-stars="5" onclick="openDetails('Sahara Star')">
+                            <td class="hotel-name-cell">Sahara Star</td>
+                            <td>Base Category</td>
+                            <td>5 Star</td>
+                            <td>6.2 Km</td>
+                            <td>₹ 12,500</td>
+                            <td>₹ 13,800</td>
+                        </tr>
+                        <tr class="hotel-row" data-area="airport_t1" data-stars="5" onclick="openDetails('Orchid Mumbai')">
+                            <td class="hotel-name-cell">The Orchid Hotel Mumbai</td>
+                            <td>Base Category</td>
+                            <td>5 Star</td>
+                            <td>7.1 Km</td>
+                            <td>₹ 9,900</td>
+                            <td>₹ 11,000</td>
+                        </tr>
+                        <tr class="hotel-row" data-area="airport_t2" data-stars="5" onclick="openDetails('The Novotel Mumbai Intl Airport')">
+                            <td class="hotel-name-cell">Novotel Intl Airport</td>
+                            <td>Base Category</td>
+                            <td>5 Star</td>
+                            <td>8.0 Km</td>
+                            <td>₹ 11,500</td>
+                            <td>₹ 12,800</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Visual Hotel Cards Section -->
         <div class="row">
             <div class="col-12">
                 <h2 class="section-title">Exclusive Mumbai Hotel Packages</h2>
                 <p class="text-muted lead">Managed by Leading Edge Global - Official Travel Partner.</p>
             </div>
         </div>
-
+        
         <div class="row g-4" id="hotelListing">
             <!-- Hotel 1 -->
             <div class="col-lg-4 col-md-6 hotel-item" data-area="bkc" data-stars="5">
@@ -255,7 +497,6 @@
                             <li>Kids India Delegate Rates</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹12,500 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
@@ -278,7 +519,6 @@
                             <li>24/7 Business Concierge</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
@@ -301,7 +541,6 @@
                             <li>Large Exhibition Space / Gardens</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹16,500 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
@@ -324,12 +563,12 @@
                             <li>Luxury Club & City Views</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Hotel 5 -->
             <div class="col-lg-4 col-md-6 hotel-item" data-area="airport_t1" data-stars="5">
                 <div class="hotel-card" onclick="openDetails('Sahara Star')">
@@ -346,12 +585,12 @@
                             <li>Large Internal Lagoon Views</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Hotel 6 -->
             <div class="col-lg-4 col-md-6 hotel-item" data-area="airport_t1" data-stars="5">
                 <div class="hotel-card" onclick="openDetails('Orchid Mumbai')">
@@ -368,12 +607,12 @@
                             <li>Eco-Friendly Certification</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Hotel 7 -->
             <div class="col-lg-4 col-md-6 hotel-item" data-area="airport_t2" data-stars="5">
                 <div class="hotel-card" onclick="openDetails('The Novotel Mumbai Intl Airport')">
@@ -390,12 +629,12 @@
                             <li>Modern Business Facilities</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Hotel 8 -->
             <div class="col-lg-4 col-md-6 hotel-item" data-area="near_bkc" data-stars="4">
                 <div class="hotel-card" onclick="openDetails('Lemon Tree Hotel Kalina')">
@@ -412,12 +651,12 @@
                             <li>Upbeat, Modern Design</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Hotel 9 -->
             <div class="col-lg-4 col-md-6 hotel-item" data-area="weh" data-stars="4">
                 <div class="hotel-card" onclick="openDetails('Bloom HUB WEH')">
@@ -428,25 +667,25 @@
                             <span class="text-muted small fw-bold">Andheri/WEH</span>
                         </div>
                         <h5 class="card-title fw-bold">Bloom HUB WEH</h5>
-                        <p class="cardalk-text small text-muted">Reliable boutique comfort on the Western Express Highway. Easy access for commuting.</p>
+                        <p class="card-text small text-muted">Reliable boutique comfort on the Western Express Highway. Easy access for commuting.</p>
                         <ul class="small mb-3 text-secondary">
                             <li>On Western Express Highway</li>
                             <li>Boutique Mid-scale Comfort</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Hotel 10 -->
-            <div class="col-lg-4 col-md-6 hotel-item" data-area="near_bkc" data-stars="5">
+            <div class="col-lg-4 col-md-6 hotel-item" data-area="near_bkc" data-stars="4">
                 <div class="hotel-card" onclick="openDetails('ibis Mumbai BKC')">
                     <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnfRtOsp73E0y9vPdYjkz-0de9YI8VcMIRs3OI0CqHOiT8XC_X7doJh2YQQ1804rdcRh5XFwMXkPNCBxVPhWiWIe6o6iXL-9QVFenolHHP0J7_-kDvvoYzDaaAiDO0l6nyurmrSp1XKHmlz=s1360-w1360-h1020-rw?auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Hotel">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge badge-star">5 ★</span>
+                            <span class="badge badge-star">4 ★</span>
                             <span class="text-muted small fw-bold">BKC Area</span>
                         </div>
                         <h5 class="card-title fw-bold">ibis Mumbai BKC</h5>
@@ -456,12 +695,12 @@
                             <li>International Economy Brand</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Hotel 11 -->
             <div class="col-lg-4 col-md-6 hotel-item" data-area="near_bkc" data-stars="3">
                 <div class="hotel-card" onclick="openDetails('Indie Stay Kalina BKC')">
@@ -478,12 +717,12 @@
                             <li>Unique Boutique Design</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Hotel 12 -->
             <div class="col-lg-4 col-md-6 hotel-item" data-area="near_bkc" data-stars="3">
                 <div class="hotel-card" onclick="openDetails('Bloom Hotel Kalina')">
@@ -500,12 +739,12 @@
                             <li>Efficient Boutique Rooms</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Hotel 13 -->
             <div class="col-lg-4 col-md-6 hotel-item" data-area="kurla" data-stars="3">
                 <div class="hotel-card" onclick="openDetails('Kohinoor Elite, Kurla')">
@@ -522,12 +761,12 @@
                             <li>Efficient Business Stays</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Hotel 14 -->
             <div class="col-lg-4 col-md-6 hotel-item" data-area="airport_t1" data-stars="3">
                 <div class="hotel-card" onclick="openDetails('Bawa International')">
@@ -544,13 +783,11 @@
                             <li>Practical Domestic Commute</li>
                         </ul>
                         <div class="d-flex justify-content-between align-items-center border-top pt-3">
-                            <!-- <div class="package-price">₹14,000 <small class="text-muted" style="font-size: 0.7rem;">/Night</small></div> -->
                             <span class="text-primary small fw-bold">View Details</span>
                         </div>
                     </div>
                 </div>
             </div>
-
 
         </div>
     </main>
@@ -583,7 +820,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0">
                 <div class="modal-header bg-dark">
-                    <h5 class="modal-title fw-bold">Rate Request Form</h5>
+                    <h5 class="modal-title fw-bold text-white">Rate Request Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
@@ -616,7 +853,18 @@
                             <select class="form-select bg-light" id="interestedHotel" required>
                                 <option value="Sofitel Mumbai BKC">Sofitel Mumbai BKC</option>
                                 <option value="Trident Bandra Kurla">Trident Bandra Kurla</option>
-                                <option value="JW Marriott Juhu">JW Marriott Juhu</option>
+                                <option value="Grand Hyatt Mumbai">Grand Hyatt Mumbai</option>
+                                <option value="Taj Santacruz">Taj Santacruz</option>
+                                <option value="Sahara Star">Sahara Star</option>
+                                <option value="Orchid Mumbai">The Orchid Hotel Mumbai</option>
+                                <option value="The Novotel Mumbai Intl Airport">Novotel Intl Airport</option>
+                                <option value="Lemon Tree Hotel Kalina">Lemon Tree Hotel Kalina</option>
+                                <option value="ibis Mumbai BKC">ibis Mumbai BKC</option>
+                                <option value="Bloom HUB WEH">Bloom HUB WEH</option>
+                                <option value="Indie Stay Kalina BKC">Indie Stay Kalina BKC</option>
+                                <option value="Bloom Hotel Kalina">Bloom Hotel Kalina</option>
+                                <option value="Kohinoor Elite, Kurla">Kohinoor Elite</option>
+                                <option value="Bawa International">Bawa International</option>
                             </select>
                         </div>
                         <div class="col-12 mt-4">
@@ -666,66 +914,65 @@
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk-1ENfFmdQXwnsk-t_MmSfmOSbtskhag_4VWbj-EN1gwa3W7EOSpG7VTUmm7NbBzgcYwQ2XfeUTj1Dx-FEvpacLyWxjrJCJvdX2EbM6ChC1oworazejwnZ3ZVvSMvCU3vmmKI=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             },
             'Grand Hyatt Mumbai': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
-                img1: 'https://lh3.googleusercontent.com/proxy/wEpu_WBlRBDBjLdINefHS4RpiXpG1t1WKVY-4tMvD4HxnA90D18OqpX-u0l9fm8bP1ob4rKYcvjqoOLPGAbA-IoJkHtj-lqRN7A76FnzI4JX5RZEWIfE_cJCnLSDnOParTgMEQx8WaiFVPDGFrfB_EGvtAAa3A=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                desc: 'Located near BKC, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                img1: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/85/b8/99/caption.jpg?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnrETDE0PqRei3LgcXfDtJubO5R0ttzb8hAljC8DAxCZPCkeKQ5zWIBq4OBvTxQw-SpBwD5JB6UkzhM-fIxRnrrZXSoosnQoI2vh6txSF4ndw-A1pYG5kABORW3F2jbZtTAaaZT9A=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             },
             'Taj Santacruz': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                desc: 'Luxury at domestic Terminal T1 with quick commute options to the BKC exhibition hub.',
                 img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm4pQp9e8MggREFz_6dHFy06Q_siSeCawCK52OuE6-8c-wlf7dr9c9ahlKHsP89rCuMnPszKGCATzGJUlIczkenZbPyVH5hYFHJgrvsDeJDL_mOrEAqY2oWdhrArJja5tVsKWYnOuWCnBZk=w243-h174-n-k-no-nu?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWniUd4dJKtnvsV7fGpgmjFxJzoy63y3JbhHGAoU0prigf-bf2G7rUrQImDq701jIW16kZKoud76Ic1yfbmIbGRmO_bh-J0CQPABTwDzFjyaY3uN4ce6P2FELBVMitHLmZ2KzxgrFQ=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             },
             'Sahara Star': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
-                img1: 'https://lh3.googleusercontent.com/proxy/t6ZqGw6qcX5efKyyJNs2kYeWauHrPr-2OUdyHhAhUlotYtpi9uEiLHfTxF5EcHgfXQBden1mnULzshAJxwplSpbaETFfOwrHHKbGZmdN9ugDdYx_sGbAL6rxzrOHToibzHRvFPbxidMcHfwUJxlbvob935X79Ng=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                desc: 'A magnificent 5-star property adjacent to Terminal 1 with unique tropical lagoon architecture.',
+                img1: 'https://www.tripurastarnews.com/wp-content/uploads/2025/06/Beer-Island-Sahara-Star-1024x576.jpeg?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmlaOTTY5fBZqHeqVGeBtMeCByjQIGXu6Xn8Q-1xu6mcM7z0iw4iiKgegcVc-F4-fn5ZKBHKQa6TppEuNHW8hsMaYiHj0zCWWgLbnxlP_9QO0C_LL4O1FLECxi5lPyW6-d14iE=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             },
             'Orchid Mumbai': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
-                img1: 'https://lh3.googleusercontent.com/proxy/YbpPPwsJE_JEzxTz5fAXyf0Mys6osxrnTbcwfcxkEkBlZzVzPWdbsXOhOFIaG2Y6INbKZyyC5atSc9i35hUPS229QJMLN4k8fL9UBdS9CKXQzKNDF-dNNY6mFsnGfKzlz4ynl_0AvvzY8nxpFqYehLdwfyIxWqc=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                desc: 'Eco-certified 5-star luxury property near Terminal 1 with award-winning sustainability practices.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmW5LgXT_xEODyHODqrdDHPTnC0cRWj9mxnww19aAxxSQAEi3NK1IdvXFmNPmU-2MbuBa9upOu1x1SUyxwFaAF7vQhT9QE7eyR26rGhjqBXWLyJrV83K61IuLS_q7EDsFVnZTC2=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmNgfrxq0FsVMpfwJqjPOfeWEe9yMPmCdH4eW8crTo6WKccusjOAeGBRsvaVSr3v_5zZFTSBrf0LNMJ_UOjFhHQ9G9c42tq5mRInYiSuwMKUf-6TRp6U8qc1qeekWf5xN62T6jd4g=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             },
             'The Novotel Mumbai Intl Airport': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
-                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkXbzVaUOCqbxzilzE9vnSaMh8jPXlUYC3porrB_-WeIEoGA2CWxOIjPqKe8YvWG9EYbrUuqDxabiz03nxac9lGohpbUZUEe_U0czd_bHnzcHzR_HdSiAzPf_sNXEns8yHryy1WDg=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                desc: 'Modern international 5-star hotel near T2, equipped with contemporary amenities for global delegates.',
+                img1: 'https://www.novotelmumbaiinternationalairport.com/wp-content/uploads/sites/30/2023/04/Swimming-Pool-copy-1920x1200.jpg?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkbcb64FGemIEfabLELUeyJ4PqSMlEVe2H3CB2o2zjPsFgb9LIpxD_4IKCyPAshrIGb36VLO5-ojt4W8DVXnxKzSdRHYUJe7NRtpM9WreKLUIlVvhuc1qaiJ4wKNsdiZBBtDjyP=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             },
             'Lemon Tree Hotel Kalina': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
-                img1: 'https://lh3.googleusercontent.com/proxy/3ronVAUdTy8ROE-zDJDLdLqRwnFbPeDjGAPnjPcaom0b1K4gcaP8Asu4hTim93PAztOkzmhglCIojlPVuiO4wtPiF6txJCOjeBC3jFTEMtBO_aIShhVlmA0TvUsmDv7iC8g3kmUjBL_HXiW-jN-Cw0ZL9r1LLr0=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                desc: 'Vibrant 4-star property offering convenient proximity to Jio World Convention Centre.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkrn3AMxJSwKhMqvflmxIqPWOff0Ba2cZ5P_Z-qhS5UBAwfqS85wv3Pj4HhlF87Y2ke9teV0DoGidcvX05nMz1E9PpNFqxdcGrCXcY8lAmCRLQaaBp9d7oy3ko0cI3rNprjMQTm=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnA3aW7U4CUsBX47yNSZtvXlF_CZFCBqWq1LjmkICkixxn5_A_z6S9N0EtnZlEbXolAFtZ3Tp7hzt6qWRQme2L7Ag3dDsOYNCrjXyw7LM-IoCzGZLnXT28lnrBoOuzL-Vs4mh98=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             },
             'Bloom HUB WEH': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
-                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnBaxADhYTK_X-547bzzoroUvfWaZ8lz29BAYSFqG1wUR6aEjxJdNKS_e23TSfGWCT_Elmkrzem-7ExrCH3e4-vANRIbZjghbnVMnUb9lYhx7ZRdA3sgLQ89sE0eYb-gwI9Kss=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
+                desc: 'Modern business hotel on the Western Express Highway with swift connection to central venues.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkR-ZY3CZYwV7rZs8Jn_JKKkdw_dzj-rD4yr_tLbqRUKegaMxeN_zCpg51vjOnJlaXVRH-V1kvZTCrYD6DSxxiLSCSgSrHeBXl-ULTkhs0OxkleA5CqRAc2Zl9vS2hbsVaD2_Zv=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn6sceSS2hoVL-8K5bymaX38Da--i6Llg5s37O2urdLMBGQB0323QDppK6ahELI3lsQ-o8XGyq2PXaweiekXGwWepALf908i4kjvkJEgSQKjkcfGDtkeGae0Zl_DWid88WNTpBMY2ffLfiD=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             },
             'ibis Mumbai BKC': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
-                img1: 'https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=800&q=80',
+                desc: 'Smart 4-star business accommodation located right near the entrance of BKC.',
+                img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnfRtOsp73E0y9vPdYjkz-0de9YI8VcMIRs3OI0CqHOiT8XC_X7doJh2YQQ1804rdcRh5XFwMXkPNCBxVPhWiWIe6o6iXL-9QVFenolHHP0J7_-kDvvoYzDaaAiDO0l6nyurmrSp1XKHmlz=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80'
             },
             'Indie Stay Kalina BKC': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                desc: 'Cozy boutique hotel offering quick travel to BKC venue with specialized delegate hospitality.',
                 img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn2eTVyJ_WhPZG4tW4Rp11ygFTBWrkse6C9KmhhpMto7Uf9uHUh_HzaAsmHevSdZGD6PySeAxzobPwRTbJoaRIVbg9tbGiytzC8TnstctRSl78t3iBwzjMc8id1Rm79xct-GRo=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm38zplSrGNk8u6kYw58hF52Am3JdJ-QQ5PVtIfLg1Y2mwpCk0d6_UO8HZekYx2Vs0fqw3I59CzUZ4grcYFEW8zz23kBGMRSB4QU8pS4HBvrp--eVYVVSHc6_g-q5zL2_S7EoRWJQ=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             },
             'Bloom Hotel Kalina': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                desc: 'Clean, reliable 3-star property catering to exhibition visitors with comfortable amenities.',
                 img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmH-SnDx1vPpH1tGMhHL9vpx39OI9_5nL5_hPIxd6jXIj45NNsq7WMZQTfe_Xl0O0J1MgORnB7UELOg51-UYHGUGhzIW4lHmfeW9sp2oYfvke_yG-mMbF2Hjm_9DVZHN0wfa0eSWi2WSWU=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlprNCHII6vIySlKAkWaeKtHq5ycztvtYF_J0sRanKCrAQ6aOKGFdsKX7GcWyE2nH2h3haEImg8ZOR3_UDe9tMHxjIIZ-8tTVCf2dqefaQVcbAFxWxt92xHYZWlOFOSZjxets1jsC9ylSAQ=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             },
             'Kohinoor Elite, Kurla': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                desc: 'Budget-friendly 3-star hotel with comfortable suites and direct connectivity to BKC.',
                 img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmyN9gR7NA-_46V0daNCUl-Y-bszUBxQlZICgHp6Q2YPSCYCHLP43enjPTyZdnkGm9aTu5sgX5GxPyIgtvatMQYt-wqKcphCrIEnPvofIM9-2B7g1_XgQXUSZDp8S2jfLOzY4fa=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWl1dL4CwPJsXIJXSUII3IMUQasM45pNxsvO0xv45Jqdgve_qIxT1Ov7yefb5IkY04VCxPUcxeFot4m9PD1ma6Eafb4IVln-aEeju_HIlrPZAX6wvHWWRRVGLVP3ySxGyPSwtFLz8GcJsb78=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             },
             'Bawa International': {
-                desc: 'Located on the coast, this luxury icon offers the perfect blend of business and leisure for Kids India visitors.',
+                desc: 'Classic business hotel located right near T1 Domestic terminal.',
                 img1: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnFN9eWFvNLvo-ybXvKkY1muM3eLcoXV5I_r9DkddfK0jcf5ZEUuLPXeS0SJZjgzBgT2O8U4uYTkAgiHObDiNpEB58ssD-4PAmyXtsUtbD2Jw2hwbTxE8cCcuGpvr2YXriZhRI=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80',
                 img2: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkz81O1-CSkEnNKVcwcjSe1drIDwrFbWOySiU6lafaJFcPc_R87UCpEkElMBfANThoWni9nxglejnGMYhT5XkRIQmDCcB8kTI_qAJuUKOrSvH1euN1aeQ0xKvEMd2kqyMnS_t1XQhw3WYqe=s1360-w1360-h1020-rw?auto=format&fit=crop&w=800&q=80'
             }
-
         };
 
         let currentDetailModal, currentInquiryModal;
@@ -736,12 +983,45 @@
         };
 
         function openDetails(name) {
-            const data = hotelData[name];
+            const cleanName = name.replace(' – BKC Kalina', '').replace('The Orchid Hotel Mumbai', 'Orchid Mumbai');
+            const data = hotelData[name] || hotelData[cleanName] || {
+                desc: 'Exclusive delegate hotel partnership for Kids India exhibition visitors.',
+                img1: 'https://placehold.co/800x500/d32f2f/ffffff?text=Hotel+Room',
+                img2: 'https://placehold.co/800x500/333333/ffffff?text=Hotel+Amenities'
+            };
+
             document.getElementById('detailModalLabel').innerText = name;
             document.getElementById('img1').src = data.img1;
             document.getElementById('img2').src = data.img2;
-            document.getElementById('hotelFullDesc').innerHTML = `<h6 class="fw-bold mb-3">About the Property</h6><p class="text-secondary">${data.desc}</p><div class="row mt-4"><div class="col-6"><ul class="small"><li>Complimentary Breakfast</li><li>Shuttle Service</li></ul></div><div class="col-6"><ul class="small"><li>High Speed Wi-Fi</li><li>Fitness Center</li></ul></div></div>`;
-            document.getElementById('interestedHotel').value = name;
+            document.getElementById('hotelFullDesc').innerHTML = `
+                <h6 class="fw-bold mb-3">About the Property</h6>
+                <p class="text-secondary">${data.desc}</p>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <ul class="small text-secondary">
+                            <li>Complimentary Breakfast</li>
+                            <li>Exhibition Shuttle Service</li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="small text-secondary">
+                            <li>High Speed Wi-Fi</li>
+                            <li>Express Check-in</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            const selectElem = document.getElementById('interestedHotel');
+            if (selectElem) {
+                for (let option of selectElem.options) {
+                    if (option.value.toLowerCase().includes(cleanName.toLowerCase()) || cleanName.toLowerCase().includes(option.value.toLowerCase())) {
+                        selectElem.value = option.value;
+                        break;
+                    }
+                }
+            }
+
             currentDetailModal.show();
         }
 
@@ -762,11 +1042,34 @@
         function filterHotels() {
             const area = document.getElementById('areaSelect').value;
             const stars = document.getElementById('starSelect').value;
+
+            // Filter Table Rows
+            const tableRows = document.querySelectorAll('.tariff-table tbody tr.hotel-row');
+            tableRows.forEach(row => {
+                const itemArea = row.getAttribute('data-area');
+                const itemStars = row.getAttribute('data-stars');
+                const matchesArea = !area || area === itemArea;
+                const matchesStars = !stars || stars === itemStars;
+                row.style.display = (matchesArea && matchesStars) ? '' : 'none';
+            });
+
+            // Filter Section Subheaders in Table
+            [3, 4, 5].forEach(starVal => {
+                const categoryRow = document.querySelector(`.category-row[data-category="${starVal}"]`);
+                const visibleRows = document.querySelectorAll(`.hotel-row[data-stars="${starVal}"]:not([style*="display: none"])`);
+                if (categoryRow) {
+                    categoryRow.style.display = visibleRows.length > 0 ? '' : 'none';
+                }
+            });
+
+            // Filter Cards
             const items = document.querySelectorAll('.hotel-item');
             items.forEach(item => {
                 const itemArea = item.getAttribute('data-area');
                 const itemStars = item.getAttribute('data-stars');
-                item.style.display = (!area || area === itemArea) && (!stars || stars === itemStars) ? 'block' : 'none';
+                const matchesArea = !area || area === itemArea;
+                const matchesStars = !stars || stars === itemStars;
+                item.style.display = (matchesArea && matchesStars) ? 'block' : 'none';
             });
         }
     </script>
